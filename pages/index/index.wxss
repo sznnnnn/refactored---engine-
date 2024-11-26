@@ -1,0 +1,209 @@
+.container {
+  padding: 30rpx;
+}
+
+.form-section {
+  width: 100%;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.input.error {
+  border-color: #ff4d4f;
+}
+
+.tip {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+}
+
+.error-tip {
+  color: #ff4d4f;
+}
+
+.picker {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.textarea {
+  width: 100%;
+  height: 200rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.upload-area {
+  margin-top: 20rpx;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.image-item image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+
+.delete-icon {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.upload-btn {
+  width: 160rpx;
+  height: 160rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.upload-btn .icon {
+  font-size: 60rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.upload-btn .tip {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 添加以下样式 */
+
+/* 服务人员入口按钮 */
+.staff-entry {
+  position: fixed;
+  top: 20rpx;
+  right: 20rpx;
+  z-index: 100;
+}
+
+.staff-btn {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  background: #f0f0f0;
+  border: none;
+  color: #666;
+}
+
+/* 登录弹窗 */
+.staff-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  width: 80%;
+  background: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.modal-header {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.modal-body {
+  padding: 30rpx;
+}
+
+.modal-footer {
+  padding: 20rpx 30rpx;
+  border-top: 1rpx solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+}
+
+.cancel-btn, .confirm-btn {
+  min-width: 160rpx;
+  margin: 0;
+  font-size: 28rpx;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.confirm-btn {
+  background: #07c160;
+  color: #fff;
+}
+
+.confirm-btn.disabled {
+  background: #ccc;
+} 
