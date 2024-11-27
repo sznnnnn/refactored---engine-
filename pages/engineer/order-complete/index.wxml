@@ -1,6 +1,7 @@
 <view class="container">
+  <!-- 基础信息部分 -->
   <view class="section">
-    <view class="section-title">完工信息</view>
+    <view class="section-title">基础信息</view>
     <view class="repair-form">
       <!-- 客户名称 -->
       <view class="form-item">
@@ -13,6 +14,34 @@
         />
       </view>
 
+      <!-- 设备型号 -->
+      <view class="form-item">
+        <text class="form-label required">设备型号</text>
+        <input 
+          class="form-input"
+          placeholder="请输入设备型号"
+          value="{{record.equipment}}"
+          bindinput="onEquipmentInput"
+        />
+      </view>
+
+      <!-- 故障问题 -->
+      <view class="form-item">
+        <text class="form-label">故障问题</text>
+        <textarea 
+          class="form-textarea"
+          placeholder="请描述故障问题"
+          value="{{record.issue}}"
+          bindinput="onIssueInput"
+        ></textarea>
+      </view>
+    </view>
+  </view>
+
+  <!-- 维修记录部分 -->
+  <view class="section">
+    <view class="section-title">维修记录</view>
+    <view class="repair-form">
       <!-- 机型编号 -->
       <view class="form-item">
         <text class="form-label required">机型-编号</text>
@@ -126,19 +155,22 @@
       <!-- 拍照打卡 -->
       <view class="form-item">
         <text class="form-label required">拍照打卡</text>
-        <view class="photo-list">
-          <view class="photo-item" 
-                wx:for="{{record.photos}}" 
-                wx:key="index">
+        <view class="photo-card">
+          <block wx:if="{{record.photos.length}}">
             <image 
-              src="{{item}}"
+              class="photo-preview"
+              src="{{record.photos[0]}}"
               mode="aspectFill"
               bindtap="previewPhoto"
-              data-index="{{index}}"
             />
-          </view>
-          <view class="photo-upload" bindtap="choosePhoto" wx:if="{{record.photos.length < 8}}">
-            <icon type="plus" size="30" color="#999"/>
+            <view class="photo-info">
+              <text class="photo-time">{{record.photoTime || ''}}</text>
+              <text class="photo-location">{{record.photoLocation || ''}}</text>
+            </view>
+          </block>
+          <view wx:else class="photo-placeholder" bindtap="takePhoto">
+            <view class="photo-placeholder-icon">📷</view>
+            <text class="photo-placeholder-text">点击拍照打卡</text>
           </view>
         </view>
       </view>

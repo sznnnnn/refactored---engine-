@@ -221,7 +221,7 @@ Page({
 
   // 完工提交
   completeOrder() {
-    const { repairInfo } = this.data
+    const { repairInfo, order } = this.data
     if (!repairInfo.model && !repairInfo.serialNo && 
         !repairInfo.deviceTime && !repairInfo.engineers && 
         !repairInfo.vehicle && !repairInfo.serviceItem && 
@@ -240,7 +240,15 @@ Page({
     })
 
     try {
-      const recordStr = encodeURIComponent(JSON.stringify(repairInfo))
+      // 合并工单基础信息和维修记录
+      const recordData = {
+        ...repairInfo,
+        customer: order.customer || '',
+        equipment: order.equipment || '',
+        issue: order.issue || ''
+      }
+
+      const recordStr = encodeURIComponent(JSON.stringify(recordData))
       setTimeout(() => {
         wx.hideLoading()
         wx.navigateTo({
