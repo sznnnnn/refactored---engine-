@@ -1,13 +1,36 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/staff/staff"
+    "pages/login/login",
+    "pages/engineer/index",
+    "pages/engineer/workbench",
+    "pages/engineer/profile"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "工程设备报修",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#1989fa",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/engineer/index",
+        "text": "工单列表"
+      },
+      {
+        "pagePath": "pages/engineer/workbench",
+        "text": "工作台"
+      },
+      {
+        "pagePath": "pages/engineer/profile",
+        "text": "我的"
+      }
+    ]
   },
   "permission": {
     "scope.userLocation": {

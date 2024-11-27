@@ -1,0 +1,91 @@
+/* pages/engineer/index.wxss */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: #1989fa;
+  padding: 40rpx 30rpx;
+  color: #fff;
+}
+
+.engineer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.name {
+  font-size: 36rpx;
+  font-weight: 500;
+}
+
+.type {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.content {
+  padding: 30rpx;
+}
+
+.section {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.empty-tip {
+  text-align: center;
+  color: #999;
+  padding: 40rpx 0;
+}
+
+.order-item {
+  background: #f9f9f9;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.order-type {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.order-status {
+  font-size: 24rpx;
+  color: #07c160;
+}
+
+.order-desc {
+  font-size: 26rpx;
+  color: #666;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.order-footer {
+  margin-top: 10rpx;
+}
+
+.order-time {
+  font-size: 24rpx;
+  color: #999;
+}
