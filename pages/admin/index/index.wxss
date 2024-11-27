@@ -185,3 +185,13 @@
   font-size: 24rpx;
   color: var(--text-secondary);
 }
+
+.company-logo {
+  font-size: 80rpx;
+  line-height: 1;
+}
+
+.logo-text {
+  font-size: 80rpx;
+  line-height: 1;
+}

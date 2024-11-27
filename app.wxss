@@ -14,6 +14,22 @@ page {
   background: var(--background);
   font-size: 28rpx;
   color: var(--text-main);
+  --primary-color: #1989fa;
+  --primary-gradient: linear-gradient(135deg, #1989fa, #39bbff);
+  --background: #f7f8fa;
+  --text-main: #333333;
+  --text-secondary: #666666;
+  --text-placeholder: #999999;
+  --border-color: #ebedf0;
+  --card-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  --spacing-xs: 8rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  --border-radius-sm: 4rpx;
+  --border-radius-md: 8rpx;
+  --border-radius-lg: 12rpx;
 } 
 
 /* 通用卡片样式 */

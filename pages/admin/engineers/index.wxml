@@ -1,2 +1,90 @@
 <!--pages/admin/engineers/index.wxml-->
-<text>pages/admin/engineers/index.wxml</text>
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-box">
+      <icon type="search" size="16" color="#999"/>
+      <input 
+        class="search-input"
+        placeholder="搜索工程师" 
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+    </view>
+    <view class="add-btn" bindtap="addEngineer">
+      <text class="btn-icon">+</text>
+      <text>添加工程师</text>
+    </view>
+  </view>
+
+  <!-- 排名切换 -->
+  <view class="rank-tabs">
+    <view class="tab-item {{rankType === 'orders' ? 'active' : ''}}" 
+          bindtap="switchRank" data-type="orders">
+      工单数量
+    </view>
+    <view class="tab-item {{rankType === 'score' ? 'active' : ''}}" 
+          bindtap="switchRank" data-type="score">
+      客户评分
+    </view>
+    <view class="tab-item {{rankType === 'efficiency' ? 'active' : ''}}" 
+          bindtap="switchRank" data-type="efficiency">
+      处理效率
+    </view>
+  </view>
+
+  <!-- 工程师列表 -->
+  <view class="engineer-list">
+    <view class="engineer-item" wx:for="{{sortedEngineers}}" wx:key="id">
+      <!-- 排名标记 -->
+      <view class="rank-badge {{index < 3 ? 'top-' + (index + 1) : ''}}">
+        {{index + 1}}
+      </view>
+
+      <view class="engineer-main">
+        <view class="engineer-info">
+          <text class="name">{{item.name}}</text>
+          <text class="level">{{item.level}} {{item.levelName}}</text>
+        </view>
+        <text class="status {{item.status}}">{{item.statusText}}</text>
+      </view>
+      
+      <view class="engineer-detail">
+        <view class="detail-row">
+          <text class="label">手机号：</text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="label">技能：</text>
+          <text>{{item.skills}}</text>
+        </view>
+        <view class="detail-row">
+          <text class="label">工单数：</text>
+          <text>{{item.orderCount}}单</text>
+          <text class="efficiency" wx:if="{{item.efficiency}}">
+            ({{item.efficiency}}单/天)
+          </text>
+        </view>
+        <view class="detail-row">
+          <text class="label">评分：</text>
+          <text class="score">{{item.score}}分</text>
+        </view>
+      </view>
+
+      <view class="engineer-actions">
+        <button class="action-btn" bindtap="editEngineer" data-id="{{item.id}}">编辑</button>
+        <button class="action-btn" bindtap="viewOrders" data-id="{{item.id}}">工单</button>
+        <button class="action-btn {{item.status === 'disabled' ? 'enable' : 'disable'}}" 
+                bindtap="toggleStatus" data-id="{{item.id}}">
+          {{item.status === 'disabled' ? '启用' : '停用'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="empty-tip" wx:if="{{!engineers.length}}">
+    暂无工程师数据
+  </view>
+</view>

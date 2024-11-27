@@ -1,41 +1,57 @@
 {
-  "pages": [
-    "pages/engineer/order/index",
-    "pages/engineer/workbench/index",
-    "pages/engineer/profile/index",
-    "pages/engineer/order-detail/index",
-    "pages/engineer/order-process/index",
-    "pages/engineer/order-complete/index",
-    "pages/engineer/history/index",
-    "pages/engineer/settings/index",
-    "pages/engineer/analysis/index",
-    "pages/login/login"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "工程设备报修",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#666666",
-    "selectedColor": "#1989fa",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/engineer/order/index",
-        "text": "工单"
-      },
-      {
-        "pagePath": "pages/engineer/workbench/index",
-        "text": "🔧工作台"
-      },
-      {
-        "pagePath": "pages/engineer/profile/index",
-        "text": "👤我的"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+  
+    "pages": [
+      "pages/login/login",
+      "pages/admin/index/index",
+      "pages/admin/orders/index",
+      "pages/admin/engineers/index",
+      "pages/admin/statistics/index",
+      "pages/engineer/order/index",
+      "pages/engineer/workbench/index",
+      "pages/engineer/profile/index",
+      "pages/engineer/order-detail/index",
+      "pages/engineer/order-process/index",
+      "pages/engineer/order-complete/index",
+      "pages/engineer/history/index",
+      "pages/engineer/settings/index",
+      "pages/engineer/analysis/index",
+      "pages/engineer/grab-orders/index",
+      "pages/engineer/order-add/index"
+    ],
+    "window": {
+      "backgroundTextStyle": "light",
+      "navigationBarBackgroundColor": "#fff",
+      "navigationBarTitleText": "工程设备报修",
+      "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+      "custom": false,
+      "color": "#666666",
+      "selectedColor": "#1989fa",
+      "backgroundColor": "#ffffff",
+      "borderStyle": "black",
+      "list": [
+        {
+          "pagePath": "pages/admin/index/index",
+          "text": "工作台",
+          "text_": "🏠"
+        },
+        {
+          "pagePath": "pages/admin/orders/index",
+          "text": "工单管理",
+          "text_": "📋"
+        },
+        {
+          "pagePath": "pages/admin/engineers/index",
+          "text": "工程师",
+          "text_": "👥"
+        },
+        {
+          "pagePath": "pages/admin/statistics/index",
+          "text": "统计",
+          "text_": "📊"
+        }
+      ]
+    },
+    "sitemapLocation": "sitemap.json"
 } 

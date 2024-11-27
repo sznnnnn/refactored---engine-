@@ -1,47 +1,43 @@
 /* pages/login/login.wxss */
 .container {
-  min-height: 100vh;
-  background: var(--primary-gradient);
   padding: var(--spacing-lg);
-  box-sizing: border-box;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  background: var(--background);
 }
 
 .login-header {
   text-align: center;
-  margin-top: 80rpx;
+  margin: 100rpx 0;
 }
 
 .logo {
-  width: 160rpx;
-  height: 160rpx;
+  font-size: 120rpx;
   margin-bottom: var(--spacing-md);
 }
 
 .title {
   display: block;
-  font-size: 48rpx;
-  font-weight: 600;
-  color: #fff;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: var(--text-main);
   margin-bottom: var(--spacing-xs);
 }
 
 .subtitle {
-  font-size: 32rpx;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 28rpx;
+  color: var(--text-secondary);
 }
 
-.login-card {
+.login-form {
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-lg);
-  box-sizing: border-box;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--card-shadow);
 }
 
 .form-item {
@@ -63,7 +59,6 @@
   padding: 0 var(--spacing-md);
   font-size: 28rpx;
   box-sizing: border-box;
-  color: var(--text-placeholder);
 }
 
 .login-btn {
@@ -73,21 +68,21 @@
   background: var(--primary-color);
   color: #fff;
   font-size: 32rpx;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   margin-top: var(--spacing-lg);
-  font-weight: normal;
 }
 
-.login-btn[loading] {
-  opacity: 0.8;
+.login-btn:active {
+  opacity: 0.9;
 }
 
 .footer {
+  margin-top: auto;
   text-align: center;
-  margin-bottom: var(--spacing-lg);
 }
 
 .copyright {
   font-size: 24rpx;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
+  opacity: 0.8;
 }

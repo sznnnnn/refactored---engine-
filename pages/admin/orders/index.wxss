@@ -1,1 +1,207 @@
 /* pages/admin/orders/index.wxss */
+.container {
+  padding: var(--spacing-sm);
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* 搜索栏 */
+.search-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: var(--spacing-sm);
+  background: var(--background);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--card-shadow);
+}
+
+.search-input {
+  flex: 1;
+  margin-left: var(--spacing-sm);
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+/* 状态筛选 */
+.filter-tabs {
+  display: flex;
+  background: #fff;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--card-shadow);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: var(--spacing-sm) 0;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+.count {
+  font-size: 24rpx;
+  opacity: 0.8;
+  margin-left: 4rpx;
+}
+
+/* 工单列表 */
+.order-item {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--card-shadow);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.order-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.order-no {
+  font-size: 28rpx;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.time {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  background: var(--background);
+  padding: 4rpx 12rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.status.pending {
+  color: #ff9800;
+  background: #fff7e6;
+}
+
+.status.processing {
+  color: #1989fa;
+  background: #e6f7ff;
+}
+
+.status.completed {
+  color: #52c41a;
+  background: #f6ffed;
+}
+
+.order-info {
+  padding: var(--spacing-sm) 0;
+  border-top: 1rpx solid var(--border-color);
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: var(--spacing-xs);
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  color: var(--text-secondary);
+  width: 120rpx;
+  flex-shrink: 0;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.action-btn {
+  min-width: 120rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 26rpx;
+  margin: 0;
+  padding: 0 var(--spacing-sm);
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* 空状态提示 */
+.empty-tip {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+  padding: var(--spacing-xl) 0;
+  opacity: 0.8;
+}
+
+/* 工程师名字样式 */
+.engineer-name {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 28rpx;
+}
+
+.pending-tag {
+  color: #ff9800;
+  font-size: 26rpx;
+  background: #fff7e6;
+  padding: 2rpx 12rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.duration {
+  color: var(--text-secondary);
+  font-size: 24rpx;
+  margin-left: var(--spacing-xs);
+}
+
+.duration.warning {
+  color: #ff4d4f;
+}

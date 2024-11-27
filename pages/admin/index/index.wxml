@@ -3,7 +3,7 @@
   <!-- 顶部信息 -->
   <view class="header">
     <view class="company-info">
-      <image class="logo" src="/workwork/images/jianyou-logo.png" mode="aspectFit"/>
+      <text class="logo-text">🏢</text>
       <text class="company-name">建友机械服务平台</text>
     </view>
     <view class="admin-info">
