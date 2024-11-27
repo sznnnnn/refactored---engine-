@@ -32,7 +32,14 @@
           </view>
           <view class="info-row">
             <text class="label">地点：</text>
-            <text>{{item.location}}</text>
+            <view class="location-wrap">
+              <text>{{item.location}}</text>
+              <view class="copy-btn" 
+                    catchtap="copyLocation" 
+                    data-location="{{item.location}}">
+                复制
+              </view>
+            </view>
           </view>
         </view>
         <view class="order-actions">
@@ -81,7 +88,14 @@
           </view>
           <view class="info-row">
             <text class="label">地点：</text>
-            <text>{{item.location}}</text>
+            <view class="location-wrap">
+              <text>{{item.location}}</text>
+              <view class="copy-btn" 
+                    catchtap="copyLocation" 
+                    data-location="{{item.location}}">
+                复制
+              </view>
+            </view>
           </view>
         </view>
         <view class="order-actions">

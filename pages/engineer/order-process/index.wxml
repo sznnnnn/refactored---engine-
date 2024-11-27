@@ -1,0 +1,248 @@
+<view class="container">
+  <!-- 工单信息 -->
+  <view class="section">
+    <view class="section-title">工单信息</view>
+    <view class="info-card">
+      <view class="info-row">
+        <text class="label">工单号：</text>
+        <text>{{order.orderNo}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">客户：</text>
+        <text>{{order.customer}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">设备：</text>
+        <text>{{order.equipment}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">故障：</text>
+        <text>{{order.issue}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">地点：</text>
+        <view class="location-wrap">
+          <text>{{order.location}}</text>
+          <view class="copy-btn" bindtap="copyLocation">复制</view>
+        </view>
+      </view>
+
+      <!-- 客户上传的照片 -->
+      <view class="info-row photo-row" wx:if="{{order.customerPhotos.length}}">
+        <text class="label">现场图片：</text>
+        <view class="customer-photos">
+          <image 
+            wx:for="{{order.customerPhotos}}" 
+            wx:key="index"
+            src="{{item}}"
+            mode="aspectFill"
+            bindtap="previewCustomerPhoto"
+            data-index="{{index}}"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 维修记录 -->
+  <view class="section">
+    <view class="section-title">维修记录</view>
+    <view class="repair-form">
+      <!-- 基础信息 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text>机型-编号</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <view class="model-no-row">
+          <input 
+            class="form-input model-input"
+            placeholder="请输入机型"
+            value="{{repairInfo.model}}"
+            bindinput="onModelInput"
+          />
+          <text class="separator">-</text>
+          <input 
+            class="form-input no-input"
+            placeholder="请输入编号"
+            value="{{repairInfo.serialNo}}"
+            bindinput="onSerialNoInput"
+          />
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">
+          <text>设备时间</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <input 
+          class="form-input"
+          placeholder="请输入设备运行时间"
+          value="{{repairInfo.deviceTime}}"
+          bindinput="onDeviceTimeInput"
+        />
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">
+          <text>服务工程师</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <view class="engineers-wrap">
+          <!-- 已选工程师列表 -->
+          <view class="engineers-list">
+            <view class="engineer-tag" wx:for="{{repairInfo.engineers}}" wx:key="index">
+              <text>{{item}}</text>
+              <icon wx:if="{{index !== 0}}" 
+                    type="clear" 
+                    size="12" 
+                    color="#999"
+                    catchtap="removeEngineer" 
+                    data-index="{{index}}"
+              />
+            </view>
+          </view>
+          <!-- 添加工程师按钮 -->
+          <view class="add-engineer" bindtap="showEngineerInput">
+            <text class="add-text">添加工程师</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">
+          <text>服务车辆</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <picker bindchange="onVehicleChange" value="{{vehicleIndex}}" range="{{vehicles}}">
+          <view class="picker-wrap">
+            <text class="{{repairInfo.vehicle ? '' : 'placeholder'}}">
+              {{repairInfo.vehicle || '请选择服务车辆'}}
+            </text>
+            <text class="picker-arrow">></text>
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <view class="form-label">
+          <text>服务项目</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <input 
+          class="form-input"
+          placeholder="请输入服务项目"
+          value="{{repairInfo.serviceItem}}"
+          bindinput="onServiceItemInput"
+        />
+      </view>
+
+      <!-- 故障描述 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text>故障描述</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <textarea 
+          class="form-textarea"
+          placeholder="请描述故障情况"
+          value="{{repairInfo.faultDesc}}"
+          bindinput="onFaultDescInput"
+        ></textarea>
+      </view>
+
+      <!-- 故障排除 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text>故障排除</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <textarea 
+          class="form-textarea"
+          placeholder="请描述故障排除情况"
+          value="{{repairInfo.faultResolution}}"
+          bindinput="onFaultResolutionInput"
+        ></textarea>
+      </view>
+
+      <!-- 维修方案 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text>维修方案</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <textarea 
+          class="form-textarea"
+          placeholder="请输入维修方案"
+          value="{{repairInfo.solution}}"
+          bindinput="onSolutionInput"
+        ></textarea>
+      </view>
+
+      <!-- 余留问题 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text>余留问题</text>
+          <text class="optional">（选填）</text>
+        </view>
+        <textarea 
+          class="form-textarea"
+          placeholder="请描述余留问题"
+          value="{{repairInfo.remainingIssues}}"
+          bindinput="onRemainingIssuesInput"
+        ></textarea>
+      </view>
+
+      <!-- 现场照片 -->
+      <view class="form-item">
+        <text class="form-label">现场照片</text>
+        <view class="photo-list">
+          <view class="photo-item" 
+                wx:for="{{repairInfo.photos}}" 
+                wx:key="index">
+            <image 
+              src="{{item}}" 
+              mode="aspectFill" 
+              bindtap="previewPhoto" 
+              data-index="{{index}}"
+            />
+            <icon 
+              type="clear" 
+              size="20" 
+              class="remove-icon"
+              bindtap="removePhoto" 
+              data-index="{{index}}"
+            />
+          </view>
+          <view class="photo-upload" bindtap="choosePhoto" wx:if="{{repairInfo.photos.length < 8}}">
+            <icon type="plus" size="30" color="#999"/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="footer">
+    <button class="btn save-btn" bindtap="saveRepair">保存记录</button>
+    <button class="btn complete-btn" bindtap="completeOrder">完工提交</button>
+  </view>
+</view> 
+
+<!-- 添加工程师弹窗 -->
+<view class="modal" wx:if="{{showEngineerModal}}">
+  <view class="modal-mask" bindtap="hideEngineerInput"></view>
+  <view class="modal-content">
+    <view class="modal-header">
+      <text>添加工程师</text>
+      <icon type="clear" size="20" bindtap="hideEngineerInput"/>
+    </view>
+    <input class="modal-input"
+           placeholder="请输入工程师姓名"
+           value="{{newEngineer}}"
+           bindinput="onNewEngineerInput"
+    />
+    <button class="modal-btn" bindtap="addEngineer">确定</button>
+  </view>
+</view> 

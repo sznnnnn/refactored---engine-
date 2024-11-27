@@ -7,7 +7,9 @@
     "pages/engineer/grab-orders/index",
     "pages/engineer/history/index",
     "pages/index/index",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/engineer/order-process/index",
+    "pages/engineer/order-complete/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

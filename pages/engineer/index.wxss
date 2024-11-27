@@ -127,3 +127,18 @@
   height: 4rpx;
   background: #1989fa;
 }
+
+.location-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy-btn {
+  font-size: 24rpx;
+  color: #1989fa;
+  padding: 4rpx 16rpx;
+  background: rgba(25, 137, 250, 0.1);
+  border-radius: 4rpx;
+}

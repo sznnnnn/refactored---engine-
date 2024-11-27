@@ -166,31 +166,8 @@ Page({
   // 开始处理工单
   startOrder(e) {
     const id = e.currentTarget.dataset.id
-    const order = [...this.data.todayOrders, ...this.data.pendingOrders]
-      .find(o => o.id === id)
-
-    wx.showModal({
-      title: '开始处理',
-      content: `是否开始处理${order.customer}的工单？`,
-      success: (res) => {
-        if (res.confirm) {
-          wx.showLoading({
-            title: '处理中'
-          })
-          
-          // 模拟请求
-          setTimeout(() => {
-            wx.hideLoading()
-            wx.showToast({
-              title: '已开始处理',
-              icon: 'success'
-            })
-            
-            // 刷新列表
-            this.loadOrders()
-          }, 800)
-        }
-      }
+    wx.navigateTo({
+      url: `/pages/engineer/order-process/index?id=${id}`
     })
   },
 
@@ -199,6 +176,20 @@ Page({
     const { phone } = e.currentTarget.dataset
     wx.makePhoneCall({
       phoneNumber: phone || '10086'
+    })
+  },
+
+  // 复制地址
+  copyLocation(e) {
+    const { location } = e.currentTarget.dataset
+    wx.setClipboardData({
+      data: location,
+      success: () => {
+        wx.showToast({
+          title: '地址已复制',
+          icon: 'success'
+        })
+      }
     })
   }
 })
