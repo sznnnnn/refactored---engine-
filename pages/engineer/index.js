@@ -5,8 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-    engineer: null,
-    orders: []
+    status: 'pending',
+    orders: [
+      {
+        id: '001',
+        orderNo: 'WO20231127001',
+        status: 'pending',
+        statusText: '未处理',
+        customer: '余卫才',
+        equipment: '660F 0300',
+        issue: '打不着火',
+        location: '广东省梅州市大埔县青溪镇高陂坑'
+      },
+      {
+        id: '002',
+        orderNo: 'WO20231127002',
+        status: 'processing',
+        statusText: '进行中',
+        customer: '老板',
+        equipment: '1100',
+        issue: '挨销套',
+        location: '广东省揭阳市惠来县惠城镇'
+      }
+    ]
   },
 
   /**
@@ -23,7 +44,7 @@ Page({
     }
 
     this.setData({ engineer });
-    this.loadOrders();
+    this.filterOrders();
   },
 
   /**
@@ -75,6 +96,21 @@ Page({
 
   },
 
+  // 切换状态
+  switchStatus(e) {
+    const status = e.currentTarget.dataset.status
+    this.setData({ status }, () => {
+      this.filterOrders()
+    })
+  },
+
+  // 筛选工单
+  filterOrders() {
+    const { status, orders } = this.data
+    const filteredOrders = orders.filter(order => order.status === status)
+    this.setData({ filteredOrders })
+  },
+
   // 加载工单列表
   loadOrders() {
     // TODO: 从服务器获取工单列表
@@ -88,7 +124,7 @@ Page({
   onOrderClick(e) {
     const orderId = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: `/pages/order/detail?id=${orderId}`
+      url: `/pages/engineer/order-detail/index?id=${orderId}`
     });
   }
 })

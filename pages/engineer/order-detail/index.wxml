@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="order-card">
+    <view class="order-header">
+      <text class="order-no">{{order.orderNo}}</text>
+      <text class="status {{order.status}}">{{order.statusText}}</text>
+    </view>
+    
+    <view class="info-section">
+      <view class="section-title">基本信息</view>
+      <view class="info-row">
+        <text class="label">客户：</text>
+        <text>{{order.customer}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">设备：</text>
+        <text>{{order.equipment}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">故障：</text>
+        <text>{{order.issue}}</text>
+      </view>
+      <view class="info-row">
+        <text class="label">地点：</text>
+        <text>{{order.location}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

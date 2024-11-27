@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/login/login",
     "pages/engineer/index",
     "pages/engineer/workbench",
-    "pages/engineer/profile"
+    "pages/engineer/profile",
+    "pages/engineer/order-detail/index",
+    "pages/index/index",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,13 +33,5 @@
       }
     ]
   },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "您的位置信息将用于故障设备定位"
-    }
-  },
-  "requiredPrivateInfos": [
-    "getLocation"
-  ],
   "sitemapLocation": "sitemap.json"
 } 

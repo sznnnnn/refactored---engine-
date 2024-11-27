@@ -1,50 +1,50 @@
 <view class="container">
-  <!-- 顶部统计 -->
-  <view class="stats-section">
-    <view class="stat-item">
-      <text class="stat-num">{{stats.pending || 0}}</text>
-      <text class="stat-label">待处理</text>
-    </view>
-    <view class="stat-item">
-      <text class="stat-num">{{stats.inProgress || 0}}</text>
-      <text class="stat-label">处理中</text>
-    </view>
-    <view class="stat-item">
-      <text class="stat-num">{{stats.completed || 0}}</text>
-      <text class="stat-label">已完成</text>
+  <!-- 固定搜索框 -->
+  <view class="search-bar">
+    <view class="search-box">
+      <icon type="search" size="16" color="#999"/>
+      <input 
+        class="search-input"
+        placeholder="搜索订单号/客户/设备/地点" 
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+      />
     </view>
   </view>
 
-  <!-- 快捷功能 -->
-  <view class="quick-actions">
-    <view class="action-item" bindtap="onScanCode">
-      <image class="action-icon" src="/images/scan.png" mode="aspectFit"></image>
-      <text class="action-text">扫码维修</text>
-    </view>
-    <view class="action-item" bindtap="onCheckIn">
-      <image class="action-icon" src="/images/location.png" mode="aspectFit"></image>
-      <text class="action-text">工作打卡</text>
-    </view>
-  </view>
-
-  <!-- 今日工作 -->
-  <view class="today-work">
-    <view class="section-title">今日工作</view>
-    <view class="work-list">
-      <view class="empty-tip" wx:if="{{!todayOrders || todayOrders.length === 0}}">
-        今日暂无工作安排
+  <!-- 订单池 -->
+  <order-pool 
+    orders="{{orders}}"
+    currentStatus="{{currentStatus}}"
+    bind:switchstatus="onSwitchStatus">
+    <view class="order-item" 
+          wx:for="{{filteredOrders}}" 
+          wx:key="id"
+          bindtap="onOrderTap"
+          bindlongpress="onOrderLongTap"
+          data-id="{{item.id}}">
+      <view class="order-main">
+        <text class="order-no">{{item.orderNo}}</text>
+        <text class="status {{item.status}}">{{item.statusText}}</text>
       </view>
-      <view class="work-item" 
-        wx:for="{{todayOrders}}" 
-        wx:key="id"
-        bindtap="onOrderClick"
-        data-id="{{item.id}}">
-        <text class="work-time">{{item.time}}</text>
-        <text class="work-type">{{item.deviceType}}</text>
-        <text class="work-status {{item.status === '待处理' ? 'pending' : ''}}">
-          {{item.status}}
-        </text>
+      <view class="order-info">
+        <view class="info-row">
+          <text class="label">客户：</text>
+          <text>{{item.customer}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">设备：</text>
+          <text>{{item.equipment}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">故障：</text>
+          <text>{{item.issue}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">地点：</text>
+          <text>{{item.location}}</text>
+        </view>
       </view>
     </view>
-  </view>
+  </order-pool>
 </view> 
