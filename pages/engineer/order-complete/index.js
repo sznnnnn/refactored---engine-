@@ -104,7 +104,7 @@ Page({
     // 组合时间字符串
     const dateTime = dateTimeArray.map((arr, index) => {
       const val = arr[value[index]]
-      return val.slice(0, -1) // 移除单位（年月日时分）
+      return val.slice(0, -1) // 移除单位（年月日分）
     }).join('-')
 
     this.setData({
@@ -243,34 +243,10 @@ Page({
 
   // 拍照打卡
   takePhoto() {
-    // 先获取位置信息
-    wx.showLoading({ title: '获取位置中' })
-    wx.getLocation({
-      type: 'gcj02',
-      success: (res) => {
-        const location = `${res.latitude}, ${res.longitude}`
-        this.setData({ 'record.photoLocation': location })
-        this.startCamera()
-      },
-      fail: (error) => {
-        console.error('位置获取失败:', error)
-        wx.showToast({
-          title: '位置获取失败',
-          icon: 'none'
-        })
-      },
-      complete: () => {
-        wx.hideLoading()
-      }
-    })
-  },
-
-  // 启动相机
-  startCamera() {
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'],
-      sourceType: ['camera'], // 只允许拍照
+      sourceType: ['camera'],
       success: (res) => {
         wx.showLoading({
           title: '处理中',
@@ -281,13 +257,16 @@ Page({
         const now = new Date()
         const timeStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
         
-        this.setData({ 'record.photoTime': timeStr })
+        this.setData({ 
+          'record.photoTime': timeStr
+        })
 
         // 添加水印
         this.addWatermark(res.tempFilePaths[0])
           .then(watermarkedPath => {
+            const photos = this.data.record.photos || []
             this.setData({
-              'record.photos': [watermarkedPath]
+              'record.photos': [...photos, watermarkedPath]
             })
           })
           .catch(error => {
@@ -304,17 +283,7 @@ Page({
     })
   },
 
-  // 预览照片
-  previewPhoto() {
-    const { photos } = this.data.record
-    if (photos.length) {
-      wx.previewImage({
-        urls: photos
-      })
-    }
-  },
-
-  // 添加水印到照片
+  // 添加水印
   addWatermark(tempFilePath) {
     return new Promise((resolve, reject) => {
       const { canvas, canvasContext: ctx, canvasWidth, canvasHeight } = this.data
@@ -333,17 +302,14 @@ Page({
         
         // 绘制水印背景
         ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
-        ctx.fillRect(0, canvasHeight - 80, canvasWidth, 80)
+        ctx.fillRect(0, canvasHeight - 40, canvasWidth, 40)
         
         // 绘制文字
         ctx.fillStyle = '#ffffff'
         ctx.font = '14px sans-serif'
         
         // 绘制时间
-        ctx.fillText(this.data.record.photoTime, 10, canvasHeight - 50)
-        
-        // 绘制位置
-        ctx.fillText(this.data.record.photoLocation, 10, canvasHeight - 20)
+        ctx.fillText(`拍摄时间：${this.data.record.photoTime}`, 10, canvasHeight - 15)
 
         // 导出图片
         wx.canvasToTempFilePath({
@@ -356,5 +322,73 @@ Page({
       img.onerror = () => reject(new Error('Image load failed'))
       img.src = tempFilePath
     })
+  },
+
+  // 点击获取位置
+  onLocationTap() {
+    wx.showLoading({ title: '定位中' })
+    
+    wx.getLocation({
+      type: 'gcj02',
+      success: (res) => {
+        // 使用腾讯地图逆地址解析
+        wx.request({
+          url: 'https://apis.map.qq.com/ws/geocoder/v1/',
+          data: {
+            location: `${res.latitude},${res.longitude}`,
+            key: 'YOUR_KEY', // 替换为你的腾讯地图key
+            get_poi: 0
+          },
+          success: (result) => {
+            if (result.data.status === 0) {
+              const address = result.data.result.address
+              const formatted_addresses = result.data.result.formatted_addresses
+              // 使用结构化地址或完整地址
+              const locationText = formatted_addresses?.recommend || address || '广东省梅州市梅江区'
+              
+              this.setData({
+                'record.location': locationText
+              })
+            }
+          },
+          fail: () => {
+            // 如果逆地址解析失败，使用默认地址
+            this.setData({
+              'record.location': '广东省梅州市梅江区'
+            })
+          },
+          complete: () => {
+            wx.hideLoading()
+          }
+        })
+      },
+      fail: () => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '定位失败，请手动输入',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
+  // 手动输入地址
+  onLocationInput(e) {
+    this.setData({
+      'record.location': e.detail.value
+    })
+  },
+
+  // 提交表单时的地址处理
+  submitForm() {
+    const { location } = this.data.record
+    if (!location.trim()) {
+      wx.showToast({
+        title: '请输入工作地点',
+        icon: 'none'
+      })
+      return
+    }
+    // ... 其他提交逻辑
   }
 }) 

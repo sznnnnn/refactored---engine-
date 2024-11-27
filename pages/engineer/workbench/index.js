@@ -5,7 +5,49 @@ Page({
       todayCount: 0,
       weekCount: 0,
       monthCount: 0
-    }
+    },
+    // 今日工单
+    todayOrders: [
+      {
+        id: '001',
+        orderNo: 'WO20231127001',
+        status: 'processing',
+        statusText: '进行中',
+        customer: '余卫才',
+        equipment: '660F 0300',
+        issue: '打不着火',
+        appointTime: '10:30'
+      },
+      {
+        id: '002',
+        orderNo: 'WO20231127002',
+        status: 'pending',
+        statusText: '待处理',
+        customer: '张三机械厂',
+        equipment: '1100F',
+        issue: '液压系统异常',
+        appointTime: '14:00'
+      }
+    ],
+    // 可抢工单
+    grabOrders: [
+      {
+        id: '003',
+        orderNo: 'WO20231127003',
+        customer: '李四工程',
+        equipment: '220F',
+        issue: '启动困难',
+        distance: '3.2'
+      },
+      {
+        id: '004',
+        orderNo: 'WO20231127004',
+        customer: '王五建设',
+        equipment: '330F',
+        issue: '制动系统异响',
+        distance: '5.1'
+      }
+    ]
   },
 
   onLoad() {
@@ -58,6 +100,20 @@ Page({
   onHistorySearch() {
     wx.navigateTo({
       url: '/pages/engineer/history/index'
+    })
+  },
+
+  // 查看全部今日工单
+  viewAllToday() {
+    wx.navigateTo({
+      url: '/pages/engineer/order/index'
+    })
+  },
+
+  // 查看全部可抢工单
+  viewAllGrab() {
+    wx.navigateTo({
+      url: '/pages/engineer/grab-orders/index'
     })
   }
 }) 

@@ -59,6 +59,14 @@ Page({
         createTime: '2023-11-27 09:15',
         priority: 'medium'
       }
+    ],
+
+    activeOrderId: null,
+    rejectReasons: [
+      '工程师已满负荷',
+      '超出服务范围',
+      '设备型号不支持',
+      '其他原因'
     ]
   },
 
@@ -191,5 +199,82 @@ Page({
         })
       }
     })
+  },
+
+  // 长按拒绝工单
+  onRejectOrder(e) {
+    const { id } = e.currentTarget.dataset
+    
+    // 设置激活状态
+    this.setData({ activeOrderId: id })
+
+    // 震动反馈
+    wx.vibrateShort()
+
+    // 显示拒绝原因选择
+    wx.showActionSheet({
+      itemList: this.data.rejectReasons,
+      success: (res) => {
+        const reason = this.data.rejectReasons[res.tapIndex]
+        if (res.tapIndex === this.data.rejectReasons.length - 1) {
+          // 选择其他原因时，弹出输入框
+          this.showReasonInput(id)
+        } else {
+          // 直接使用选择的原因
+          this.showRejectConfirm(id, reason)
+        }
+      },
+      complete: () => {
+        // 清除激活状态
+        this.setData({ activeOrderId: null })
+      }
+    })
+  },
+
+  // 显示原因输入框
+  showReasonInput(id) {
+    wx.showModal({
+      title: '拒绝原因',
+      editable: true,
+      placeholderText: '请输入拒绝原因',
+      success: (res) => {
+        if (res.confirm && res.content) {
+          this.showRejectConfirm(id, res.content)
+        }
+      }
+    })
+  },
+
+  // 显示拒绝确认
+  showRejectConfirm(id, reason) {
+    wx.showModal({
+      title: '确认拒绝',
+      content: `拒绝原因：${reason}\n是否确认拒绝该工单？`,
+      success: (res) => {
+        if (res.confirm) {
+          this.rejectOrder(id, reason)
+        }
+      }
+    })
+  },
+
+  // 拒绝工单
+  rejectOrder(id, reason) {
+    wx.showLoading({ title: '处理中' })
+    
+    // TODO: 调用拒绝工单接口
+    setTimeout(() => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '已拒绝工单',
+        icon: 'success'
+      })
+      
+      // 更新工单列表
+      this.loadOrders()
+
+      // 可以在这里记录拒绝原因
+      console.log('拒绝原因：', reason)
+    }, 1000)
   }
 })

@@ -62,6 +62,7 @@
   margin-bottom: 16rpx;
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.02);
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .order-item:active {
@@ -150,24 +151,32 @@
   border-top: 1rpx solid #eee;
 }
 
-.contact-btn {
+.contact-btn,
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
   font-size: 26rpx;
   padding: 12rpx 24rpx;
   border-radius: 6rpx;
-  background: #f5f5f5;
-  color: #666;
   line-height: 1.4;
   margin: 0;
 }
 
+.contact-btn {
+  background: #f5f5f5;
+  color: #666;
+}
+
 .action-btn {
-  font-size: 26rpx;
-  padding: 12rpx 24rpx;
-  border-radius: 6rpx;
   background: #1989fa;
   color: #fff;
-  line-height: 1.4;
-  margin: 0;
+}
+
+.btn-icon {
+  font-size: 28rpx;
+  line-height: 1;
 }
 
 .section:nth-child(1) {
@@ -186,4 +195,42 @@
 .section:nth-child(2) .status.pending {
   color: #ff9800;
   background: #fff7e6;
+}
+
+/* 长按效果 */
+.order-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.order-item.active {
+  background: #fff1f0;
+  border-color: #ff4d4f;
+}
+
+/* 拒绝提示 */
+.reject-tip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 77, 79, 0.9);
+  color: #fff;
+  padding: 8rpx 20rpx;
+  border-radius: var(--border-radius-sm);
+  font-size: 26rpx;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.order-item.active .reject-tip {
+  opacity: 1;
+}
+
+/* 长按时其他内容变淡 */
+.order-item.active .order-main,
+.order-item.active .order-info,
+.order-item.active .order-footer {
+  opacity: 0.3;
 }

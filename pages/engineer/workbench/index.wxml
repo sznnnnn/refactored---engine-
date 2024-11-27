@@ -36,49 +36,23 @@
         <text class="section-icon">📋</text>
         <text class="section-title">今日工单</text>
       </view>
-      <text class="section-count">2个工单</text>
+      <text class="view-all" bindtap="viewAllToday">查看全部</text>
     </view>
     <view class="order-list">
       <view class="order-item" wx:for="{{todayOrders}}" wx:key="id">
         <view class="order-main">
           <view class="order-left">
-            <text class="order-no">{{item.orderNo}}</text>
-            <text class="order-time">预约：{{item.appointTime}}</text>
+            <text class="order-time">{{item.appointTime}}</text>
+            <text class="customer">{{item.customer}}</text>
           </view>
           <text class="tag {{item.status === 'pending' ? 'tag-warning' : 'tag-primary'}}">
             {{item.statusText}}
           </text>
         </view>
-        <view class="order-info">
-          <view class="info-row">
-            <text class="label">客户：</text>
-            <text>{{item.customer}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">设备：</text>
-            <text>{{item.equipment}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">故障：</text>
-            <text>{{item.issue}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">地点：</text>
-            <view class="location-wrap">
-              <text>{{item.location}}</text>
-              <view class="copy-btn" catchtap="copyLocation" data-location="{{item.location}}">
-                复制
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="order-actions">
-          <button class="btn btn-outline" bindtap="makeCall" data-phone="{{item.phone}}">
-            联系客户
-          </button>
-          <button class="btn btn-primary" bindtap="startOrder" data-id="{{item.id}}" wx:if="{{item.status === 'pending'}}">
-            开始处理
-          </button>
+        <view class="order-brief">
+          <text>{{item.equipment}}</text>
+          <text class="divider">|</text>
+          <text>{{item.issue}}</text>
         </view>
       </view>
     </view>
@@ -91,42 +65,21 @@
         <text class="section-icon">🔔</text>
         <text class="section-title">可抢工单</text>
       </view>
-      <text class="section-count">3个工单</text>
+      <text class="view-all" bindtap="viewAllGrab">查看全部</text>
     </view>
     <view class="order-list">
       <view class="order-item" wx:for="{{grabOrders}}" wx:key="id">
         <view class="order-main">
           <view class="order-left">
-            <text class="order-no">{{item.orderNo}}</text>
-            <text class="order-time">{{item.createTime}}</text>
+            <text class="customer">{{item.customer}}</text>
+            <text class="distance">{{item.distance}}km</text>
           </view>
           <text class="tag tag-warning">待抢单</text>
         </view>
-        <view class="order-info">
-          <view class="info-row">
-            <text class="label">客户：</text>
-            <text>{{item.customer}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">设备：</text>
-            <text>{{item.equipment}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">故障：</text>
-            <text>{{item.issue}}</text>
-          </view>
-          <view class="info-row">
-            <text class="label">地点：</text>
-            <view class="location-wrap">
-              <text>{{item.location}}</text>
-              <text class="distance">{{item.distance}}km</text>
-            </view>
-          </view>
-        </view>
-        <view class="order-actions">
-          <button class="btn btn-primary" bindtap="grabOrder" data-id="{{item.id}}">
-            抢单
-          </button>
+        <view class="order-brief">
+          <text>{{item.equipment}}</text>
+          <text class="divider">|</text>
+          <text>{{item.issue}}</text>
         </view>
       </view>
     </view>

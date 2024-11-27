@@ -159,12 +159,16 @@
   height: 88rpx;
   line-height: 88rpx;
   background: #fff;
-  color: var(--error-color);
-  font-size: 32rpx;
+  color: #999;
+  font-size: 28rpx;
   border-radius: var(--border-radius-lg);
   margin: 0;
+  font-weight: normal;
+  box-shadow: var(--card-shadow);
+  opacity: 0.9;
 }
 
 .logout-btn:active {
-  opacity: 0.8;
+  opacity: 0.7;
+  background: #fafafa;
 } 

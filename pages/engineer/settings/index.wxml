@@ -1,2 +1,92 @@
 <!--pages/engineer/settings/index.wxml-->
-<text>pages/engineer/settings/index.wxml</text>
+<view class="container">
+  <!-- 基础设置 -->
+  <view class="section">
+    <view class="section-title">基础设置</view>
+    <view class="setting-list">
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">消息通知</text>
+          <text class="setting-desc">接收新工单和客户消息提醒</text>
+        </view>
+        <switch checked="{{settings.notification}}" bindchange="onNotificationChange"/>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">声音提醒</text>
+          <text class="setting-desc">新工单提示音</text>
+        </view>
+        <switch checked="{{settings.sound}}" bindchange="onSoundChange"/>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">自动定位</text>
+          <text class="setting-desc">自动获取当前位置信息</text>
+        </view>
+        <switch checked="{{settings.location}}" bindchange="onLocationChange"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工单设置 -->
+  <view class="section">
+    <view class="section-title">工单设置</view>
+    <view class="setting-list">
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">工单排序</text>
+          <text class="setting-desc">{{settings.orderSort === 'time' ? '按时间排序' : '按距离排序'}}</text>
+        </view>
+        <picker 
+          bindchange="onSortChange" 
+          value="{{settings.orderSort}}" 
+          range="{{['按时间排序', '按距离排序']}}"
+        >
+          <text class="picker-text">更改</text>
+        </picker>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">距离显示</text>
+          <text class="setting-desc">显示到客户的距离</text>
+        </view>
+        <switch checked="{{settings.showDistance}}" bindchange="onDistanceChange"/>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">自动刷新</text>
+          <text class="setting-desc">每隔5分钟刷新工单列表</text>
+        </view>
+        <switch checked="{{settings.autoRefresh}}" bindchange="onRefreshChange"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他设置 -->
+  <view class="section">
+    <view class="section-title">其他设置</view>
+    <view class="setting-list">
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">清除缓存</text>
+          <text class="setting-desc">{{cacheSize}}MB</text>
+        </view>
+        <view class="action-btn" bindtap="clearCache">清除</view>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">检查更新</text>
+          <text class="setting-desc">当前版本 {{version}}</text>
+        </view>
+        <view class="action-btn" bindtap="checkUpdate">检查</view>
+      </view>
+      <view class="setting-item">
+        <view class="setting-left">
+          <text class="setting-label">关于我们</text>
+          <text class="setting-desc">建友机械服务平台</text>
+        </view>
+        <text class="menu-arrow">></text>
+      </view>
+    </view>
+  </view>
+</view>

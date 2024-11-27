@@ -9,7 +9,8 @@
     </view>
 
     <view class="order-list">
-      <view class="order-item" wx:for="{{todayOrders}}" wx:key="id">
+      <view class="order-item {{activeOrderId === item.id ? 'active' : ''}}" wx:for="{{todayOrders}}" wx:key="id" bindtap="onOrderTap" bindlongpress="onRejectOrder" data-id="{{item.id}}">
+        <view class="reject-tip">长按可拒绝工单</view>
         <view class="order-header">
           <view class="order-no">
             <text>{{item.orderNo}}</text>
@@ -41,9 +42,13 @@
         </view>
 
         <view class="order-footer">
-          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">联系客户</button>
+          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">
+            <text class="btn-icon">{{icons.phone}}</text>
+            <text>联系客户</text>
+          </button>
           <button class="action-btn" bindtap="startOrder" data-id="{{item.id}}" wx:if="{{item.status === 'pending'}}">
-            开始处理
+            <text class="btn-icon">{{icons.start}}</text>
+            <text>开始处理</text>
           </button>
         </view>
       </view>
@@ -86,8 +91,14 @@
         </view>
 
         <view class="order-footer">
-          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">联系客户</button>
-          <button class="action-btn" bindtap="startOrder" data-id="{{item.id}}">开始处理</button>
+          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">
+            <text class="btn-icon">{{icons.phone}}</text>
+            <text>联系客户</text>
+          </button>
+          <button class="action-btn" bindtap="startOrder" data-id="{{item.id}}">
+            <text class="btn-icon">{{icons.start}}</text>
+            <text>开始处理</text>
+          </button>
         </view>
       </view>
     </view>

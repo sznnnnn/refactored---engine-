@@ -1,1 +1,85 @@
 /* pages/engineer/settings/index.wxss */
+.container {
+  padding: var(--spacing-sm);
+  background: var(--background);
+  min-height: 100vh;
+}
+
+.section {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-sm);
+}
+
+.setting-list {
+  background: #fff;
+  border-radius: var(--border-radius-md);
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  position: relative;
+}
+
+.setting-item::after {
+  content: '';
+  position: absolute;
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  bottom: 0;
+  height: 1rpx;
+  background: var(--border-color);
+}
+
+.setting-item:last-child::after {
+  display: none;
+}
+
+.setting-left {
+  flex: 1;
+  padding-right: var(--spacing-md);
+}
+
+.setting-label {
+  font-size: 28rpx;
+  color: var(--text-main);
+  margin-bottom: 4rpx;
+}
+
+.setting-desc {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.picker-text {
+  font-size: 26rpx;
+  color: var(--primary-color);
+  padding: 8rpx 20rpx;
+  background: rgba(25, 137, 250, 0.1);
+  border-radius: var(--border-radius-sm);
+}
+
+.action-btn {
+  font-size: 26rpx;
+  color: var(--primary-color);
+  padding: 8rpx 20rpx;
+  background: rgba(25, 137, 250, 0.1);
+  border-radius: var(--border-radius-sm);
+}
+
+.menu-arrow {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
