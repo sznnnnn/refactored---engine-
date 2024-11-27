@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/engineer/index",
-    "pages/engineer/workbench",
+    "pages/engineer/order/index",
+    "pages/engineer/workbench/index",
     "pages/engineer/profile/index",
     "pages/engineer/order-detail/index",
     "pages/engineer/order-process/index",
@@ -24,11 +24,11 @@
     "borderStyle": "black",
     "list": [
       {
-        "pagePath": "pages/engineer/index",
+        "pagePath": "pages/engineer/order/index",
         "text": "工单"
       },
       {
-        "pagePath": "pages/engineer/workbench",
+        "pagePath": "pages/engineer/workbench/index",
         "text": "🔧工作台"
       },
       {

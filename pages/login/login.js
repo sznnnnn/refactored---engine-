@@ -32,7 +32,7 @@ Page({
 
     // 直接跳转到工单列表页
     wx.reLaunch({
-      url: '/pages/engineer/index'
+      url: '/pages/engineer/order/index'
     })
   }
 })
