@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="order-list">
+    <view class="order-item" 
+          wx:for="{{orders}}" 
+          wx:key="id"
+          bindtap="onOrderTap"
+          data-id="{{item.id}}">
+      <view class="order-main">
+        <text class="order-no">{{item.orderNo}}</text>
+        <text class="status {{item.status}}">{{item.statusText}}</text>
+      </view>
+      <view class="order-info">
+        <view class="info-row">
+          <text class="label">客户：</text>
+          <text>{{item.customer}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">设备：</text>
+          <text>{{item.equipment}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">故障：</text>
+          <text>{{item.issue}}</text>
+        </view>
+        <view class="info-row">
+          <text class="label">地点：</text>
+          <text>{{item.location}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> 

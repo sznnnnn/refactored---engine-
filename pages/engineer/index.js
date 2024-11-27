@@ -5,27 +5,59 @@ Page({
    * 页面的初始数据
    */
   data: {
-    status: 'pending',
-    orders: [
+    // 今日工作安排
+    todayOrders: [
       {
         id: '001',
         orderNo: 'WO20231127001',
-        status: 'pending',
-        statusText: '未处理',
+        status: 'processing',
+        statusText: '进行中',
         customer: '余卫才',
         equipment: '660F 0300',
         issue: '打不着火',
-        location: '广东省梅州市大埔县青溪镇高陂坑'
+        location: '广东省梅州市大埔县青溪镇高陂坑',
+        appointTime: '10:30',
+        priority: 'high'
       },
       {
         id: '002',
         orderNo: 'WO20231127002',
-        status: 'processing',
-        statusText: '进行中',
-        customer: '老板',
-        equipment: '1100',
-        issue: '挨销套',
-        location: '广东省揭阳市惠来县惠城镇'
+        status: 'pending',
+        statusText: '待处理',
+        customer: '张三机械厂',
+        equipment: '1100F',
+        issue: '液压系统异常',
+        location: '广东省梅州市梅江区机械大道88号',
+        appointTime: '14:00',
+        priority: 'normal'
+      }
+    ],
+
+    // 待办工单
+    pendingOrders: [
+      {
+        id: '003',
+        orderNo: 'WO20231127003',
+        status: 'pending',
+        statusText: '待处理',
+        customer: '李四工程',
+        equipment: '220F',
+        issue: '启动困难，需要检修',
+        location: '广东省梅州市兴宁市工业园区',
+        createTime: '2023-11-27 08:45',
+        priority: 'low'
+      },
+      {
+        id: '004',
+        orderNo: 'WO20231127004',
+        status: 'pending',
+        statusText: '待处理',
+        customer: '王五建设',
+        equipment: '330F',
+        issue: '制动系统异响',
+        location: '广东省梅州市梅县区建设路123号',
+        createTime: '2023-11-27 09:15',
+        priority: 'medium'
       }
     ]
   },
@@ -44,7 +76,7 @@ Page({
     }
 
     this.setData({ engineer });
-    this.filterOrders();
+    this.loadOrders();
   },
 
   /**
@@ -113,18 +145,60 @@ Page({
 
   // 加载工单列表
   loadOrders() {
-    // TODO: 从服务器获取工单列表
-    // 这里先用模拟数据
-    this.setData({
-      orders: []
-    });
+    wx.showLoading({
+      title: '加载中'
+    })
+    
+    // 模拟加载延迟
+    setTimeout(() => {
+      wx.hideLoading()
+    }, 500)
   },
 
   // 点击工单
-  onOrderClick(e) {
-    const orderId = e.currentTarget.dataset.id;
+  onOrderTap(e) {
+    const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/engineer/order-detail/index?id=${orderId}`
-    });
+      url: `/pages/engineer/order-detail/index?id=${id}`
+    })
+  },
+
+  // 开始处理工单
+  startOrder(e) {
+    const id = e.currentTarget.dataset.id
+    const order = [...this.data.todayOrders, ...this.data.pendingOrders]
+      .find(o => o.id === id)
+
+    wx.showModal({
+      title: '开始处理',
+      content: `是否开始处理${order.customer}的工单？`,
+      success: (res) => {
+        if (res.confirm) {
+          wx.showLoading({
+            title: '处理中'
+          })
+          
+          // 模拟请求
+          setTimeout(() => {
+            wx.hideLoading()
+            wx.showToast({
+              title: '已开始处理',
+              icon: 'success'
+            })
+            
+            // 刷新列表
+            this.loadOrders()
+          }, 800)
+        }
+      }
+    })
+  },
+
+  // 拨打电话
+  makeCall(e) {
+    const { phone } = e.currentTarget.dataset
+    wx.makePhoneCall({
+      phoneNumber: phone || '10086'
+    })
   }
 })

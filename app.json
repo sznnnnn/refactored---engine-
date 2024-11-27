@@ -4,6 +4,8 @@
     "pages/engineer/workbench",
     "pages/engineer/profile",
     "pages/engineer/order-detail/index",
+    "pages/engineer/grab-orders/index",
+    "pages/engineer/history/index",
     "pages/index/index",
     "pages/login/login"
   ],

@@ -5,67 +5,54 @@
   min-height: 100vh;
 }
 
-.header {
-  background: #1989fa;
-  padding: 40rpx 30rpx;
-  color: #fff;
-}
-
-.engineer-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10rpx;
-}
-
-.name {
-  font-size: 36rpx;
-  font-weight: 500;
-}
-
-.type {
-  font-size: 28rpx;
-  opacity: 0.9;
-}
-
-.content {
-  padding: 30rpx;
-}
-
 .section {
-  background: #fff;
-  border-radius: 12rpx;
-  padding: 20rpx;
   margin-bottom: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
 }
 
 .section-title {
   font-size: 32rpx;
   font-weight: 500;
-  margin-bottom: 20rpx;
 }
 
-.empty-tip {
-  text-align: center;
+.section-count {
+  font-size: 26rpx;
   color: #999;
-  padding: 40rpx 0;
 }
 
 .order-item {
   background: #fff;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   padding: 20rpx;
   margin-bottom: 20rpx;
 }
 
-.order-header {
+.order-main {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16rpx;
 }
 
+.order-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
 .order-no {
   font-size: 30rpx;
   font-weight: 500;
+}
+
+.appoint-time {
+  font-size: 26rpx;
+  color: #666;
 }
 
 .status {
@@ -88,17 +75,27 @@
 
 .label {
   color: #999;
-  width: 100rpx;
+  width: 120rpx;
   flex-shrink: 0;
 }
 
-.order-footer {
-  margin-top: 10rpx;
+.order-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20rpx;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
 }
 
-.order-time {
-  font-size: 24rpx;
-  color: #999;
+.action-btn {
+  font-size: 26rpx;
+  padding: 12rpx 30rpx;
+  border-radius: 6rpx;
+  background: #1989fa;
+  color: #fff;
+  line-height: 1.4;
+  margin: 0;
 }
 
 /* 局部导航样式 */

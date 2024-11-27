@@ -1,0 +1,40 @@
+.container {
+  padding: 20rpx;
+  background: #f7f8fa;
+  min-height: 100vh;
+}
+
+.order-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-main {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.order-no {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.status {
+  font-size: 26rpx;
+  color: #1989fa;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 8rpx;
+  font-size: 26rpx;
+}
+
+.label {
+  color: #999;
+  width: 120rpx;
+  flex-shrink: 0;
+} 

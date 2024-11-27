@@ -1,50 +1,47 @@
 <view class="container">
-  <!-- 固定搜索框 -->
+  <!-- 搜索栏 -->
   <view class="search-bar">
     <view class="search-box">
       <icon type="search" size="16" color="#999"/>
       <input 
         class="search-input"
-        placeholder="搜索订单号/客户/设备/地点" 
+        placeholder="搜索客户/订单" 
         value="{{keyword}}"
         bindinput="onSearchInput"
+        bindconfirm="onSearch"
       />
     </view>
   </view>
 
-  <!-- 订单池 -->
-  <order-pool 
-    orders="{{orders}}"
-    currentStatus="{{currentStatus}}"
-    bind:switchstatus="onSwitchStatus">
-    <view class="order-item" 
-          wx:for="{{filteredOrders}}" 
-          wx:key="id"
-          bindtap="onOrderTap"
-          bindlongpress="onOrderLongTap"
-          data-id="{{item.id}}">
-      <view class="order-main">
-        <text class="order-no">{{item.orderNo}}</text>
-        <text class="status {{item.status}}">{{item.statusText}}</text>
-      </view>
-      <view class="order-info">
-        <view class="info-row">
-          <text class="label">客户：</text>
-          <text>{{item.customer}}</text>
-        </view>
-        <view class="info-row">
-          <text class="label">设备：</text>
-          <text>{{item.equipment}}</text>
-        </view>
-        <view class="info-row">
-          <text class="label">故障：</text>
-          <text>{{item.issue}}</text>
-        </view>
-        <view class="info-row">
-          <text class="label">地点：</text>
-          <text>{{item.location}}</text>
-        </view>
-      </view>
+  <!-- 工作统计 -->
+  <view class="stats-section">
+    <view class="stats-item">
+      <text class="stats-num">{{stats.todayCount}}</text>
+      <text class="stats-label">今日工单</text>
     </view>
-  </order-pool>
+    <view class="stats-item">
+      <text class="stats-num">{{stats.weekCount}}</text>
+      <text class="stats-label">本周工单</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{stats.monthCount}}</text>
+      <text class="stats-label">本月工单</text>
+    </view>
+  </view>
+
+  <!-- 功能区 -->
+  <view class="function-section">
+    <!-- 抢单入口 -->
+    <view class="function-card" bindtap="onGrabOrder">
+      <icon type="info" size="40" color="#1989fa"/>
+      <text class="function-title">抢单</text>
+      <text class="function-desc">查看可抢工单</text>
+    </view>
+    <!-- 历史查询 -->
+    <view class="function-card" bindtap="onHistorySearch">
+      <icon type="search" size="40" color="#1989fa"/>
+      <text class="function-title">历史查询</text>
+      <text class="function-desc">查看历史工单</text>
+    </view>
+  </view>
 </view> 
