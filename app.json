@@ -9,5 +9,13 @@
     "navigationBarTitleText": "工程设备报修",
     "navigationBarTextStyle": "black"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于故障设备定位"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ],
   "sitemapLocation": "sitemap.json"
 } 

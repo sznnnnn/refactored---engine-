@@ -33,7 +33,75 @@ Page({
     staffForm: {
       name: '',              // 服务人员姓名
       phone: ''             // 服务人员手机号
-    }
+    },
+    canSubmit: false,  // 是否可以提交
+
+    // 添加位置相关数据
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
+    markers: [],
+    address: ''
+  },
+
+  onLoad() {
+    // 页面加载时获取位置
+    this.getLocation()
+  },
+
+  // 获取位置信息
+  getLocation() {
+    wx.showLoading({
+      title: '定位中...'
+    })
+
+    wx.getLocation({
+      type: 'gcj02',
+      success: (res) => {
+        const { latitude, longitude } = res
+        this.setData({
+          location: { latitude, longitude },
+          markers: [{
+            id: 1,
+            latitude,
+            longitude,
+            width: 32,
+            height: 32
+          }]
+        })
+        this.getAddress(latitude, longitude)
+      },
+      fail: (err) => {
+        console.error('获取位置失败：', err)
+        wx.showToast({
+          title: '获取位置失败，请检查定位权限',
+          icon: 'none'
+        })
+      },
+      complete: () => {
+        wx.hideLoading()
+      }
+    })
+  },
+
+  // 根据经纬度获取地址
+  getAddress(latitude, longitude) {
+    // 使用腾讯地图或其他地图服务的逆地址解析
+    wx.request({
+      url: `https://apis.map.qq.com/ws/geocoder/v1/?location=${latitude},${longitude}&key=YOUR_KEY`,
+      success: (res) => {
+        if (res.data.status === 0) {
+          const address = res.data.result.formatted_addresses?.recommend || res.data.result.address
+          this.setData({ address })
+        }
+      }
+    })
+  },
+
+  // 重新获取位置
+  refreshLocation() {
+    this.getLocation()
   },
 
   // 验证手机号格式
@@ -47,6 +115,7 @@ Page({
     this.setData({
       'formData.name': e.detail.value
     })
+    this.checkSubmit()
   },
 
   // 处理电话输入
@@ -57,6 +126,7 @@ Page({
       'formData.phone': phone,
       phoneError 
     })
+    this.checkSubmit()
   },
 
   // 处理设备类型选择
@@ -73,6 +143,7 @@ Page({
       // 更新可选的故障类型列表
       currentFaultTypes: this.data.faultTypesMap[deviceType]
     })
+    this.checkSubmit()
   },
 
   // 处理故障类型选择
@@ -82,6 +153,7 @@ Page({
       faultTypeIndex: index,
       'formData.faultType': this.data.currentFaultTypes[index]
     })
+    this.checkSubmit()
   },
 
   // 处理故障详情输入
@@ -89,32 +161,36 @@ Page({
     this.setData({
       'formData.faultDetail': e.detail.value
     })
+    this.checkSubmit()
   },
 
   // 上传图片
   uploadImages() {
     const { images } = this.data.formData
-    if (images.length >= 2) {
+    if (images.length >= 8) {
       wx.showToast({ 
-        title: '最多上传2张图片', 
+        title: '最多上传8张图片', 
         icon: 'none' 
       })
       return
     }
 
     wx.chooseImage({
-      count: 2 - images.length,
+      count: 8 - images.length,
       sizeType: ['compressed'],  // 使用压缩图片
       sourceType: ['album', 'camera'],
       success: (res) => {
+        const newImages = [...images, ...res.tempFilePaths]
+        const finalImages = newImages.slice(0, 8)
+        
         this.setData({
-          'formData.images': [...images, ...res.tempFilePaths]
+          'formData.images': finalImages
         })
       }
     })
   },
 
-  // 预览图片
+  // 预览图
   previewImage(e) {
     const index = e.currentTarget.dataset.index
     wx.previewImage({
@@ -184,6 +260,116 @@ Page({
             url: '/pages/staff/staff'
           })
         }, 1500)
+      }
+    })
+  },
+
+  // 检查是否可以提交
+  checkSubmit() {
+    const { name, phone, deviceType, faultType, faultDetail } = this.data.formData
+    const { latitude, longitude } = this.data.location
+    
+    const canSubmit = name && 
+      phone && 
+      !this.data.phoneError && 
+      deviceType && 
+      faultType && 
+      faultDetail &&
+      latitude && 
+      longitude  // 添加位置验证
+    
+    this.setData({ canSubmit })
+  },
+
+  // 提交表单
+  submitForm() {
+    if (!this.data.canSubmit) {
+      wx.showToast({
+        title: '请完善必填信息',
+        icon: 'none'
+      })
+      return
+    }
+
+    // 显示提交确认
+    wx.showModal({
+      title: '确认提交',
+      content: '确定要提交报修申请吗？',
+      success: (res) => {
+        if (res.confirm) {
+          this.doSubmit()
+        }
+      }
+    })
+  },
+
+  // 执行提交
+  doSubmit() {
+    wx.showLoading({
+      title: '提交中...'
+    })
+
+    // 这里模拟提交过程，实际项目中需要调用后端API
+    setTimeout(() => {
+      wx.hideLoading()
+      
+      wx.showToast({
+        title: '提交成功',
+        icon: 'success',
+        duration: 2000,
+        success: () => {
+          // 延迟重置表单，让用户看到成功提示
+          setTimeout(() => {
+            this.resetForm()
+          }, 2000)
+        }
+      })
+    }, 1500)
+  },
+
+  // 重置表单
+  resetForm() {
+    this.setData({
+      formData: {
+        name: '',
+        phone: '',
+        deviceType: '',
+        faultType: '',
+        faultDetail: '',
+        images: []
+      },
+      phoneError: false,
+      deviceTypeIndex: -1,
+      faultTypeIndex: -1,
+      canSubmit: false
+    })
+  },
+
+  // 添加选择位置方法
+  chooseLocation() {
+    wx.chooseLocation({
+      success: (res) => {
+        const { latitude, longitude, address, name } = res
+        this.setData({
+          location: { latitude, longitude },
+          address: name ? `${name}(${address})` : address,
+          markers: [{
+            id: 1,
+            latitude,
+            longitude,
+            width: 32,
+            height: 32
+          }]
+        })
+        this.checkSubmit()
+      },
+      fail: (err) => {
+        if (err.errMsg.indexOf('auth deny') !== -1) {
+          wx.showToast({
+            title: '请授权位置权限',
+            icon: 'none'
+          })
+        }
       }
     })
   }
