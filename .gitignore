@@ -16,4 +16,7 @@ Thumbs.db
 project.private.config.json
 
 # Build
-dist/ 
+dist/
+
+# Cloud Functions
+cloudfunctions/**/node_modules/
