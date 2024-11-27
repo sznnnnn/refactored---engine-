@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 添加服务人员入口按钮 -->
   <view class="staff-entry">
-    <button class="staff-btn" bindtap="showStaffLogin">我是服务人员</button>
+    <button class="staff-btn" bindtap="onStaffLogin">我是服务人员</button>
   </view>
 
   <!-- 服务人员登录弹窗 -->

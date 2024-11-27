@@ -310,4 +310,15 @@
 
 .location-btn::after {
   border: none;
+}
+
+.staff-login {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 15px;
+  background: #07c160;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 14px;
 } 

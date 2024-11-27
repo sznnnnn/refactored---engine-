@@ -294,7 +294,7 @@ Page({
     // 显示提交确认
     wx.showModal({
       title: '确认提交',
-      content: '确定要提交报修申请吗？',
+      content: '确定要提交报修申请��？',
       success: (res) => {
         if (res.confirm) {
           this.doSubmit()
@@ -372,5 +372,18 @@ Page({
         }
       }
     })
+  },
+
+  onStaffLogin() {
+    console.log('点击服务人员入口');  // 添加日志
+    wx.navigateTo({
+      url: '/pages/login/login',
+      success: () => {
+        console.log('跳转成功');
+      },
+      fail: (error) => {
+        console.error('跳转失败：', error);
+      }
+    });
   }
 }) 

@@ -1,2 +1,26 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class="login-container">
+  <view class="login-content">
+    <view class="login-header">
+      <text>服务人员登录</text>
+      <view class="close" bindtap="onClose">×</view>
+    </view>
+    
+    <view class="login-body">
+      <view class="input-group">
+        <text>姓名</text>
+        <input type="text" placeholder="请输入姓名" model:value="{{name}}" />
+      </view>
+      
+      <view class="input-group">
+        <text>手机号</text>
+        <input type="number" placeholder="请输入手机号" model:value="{{phone}}" maxlength="11" />
+      </view>
+    </view>
+    
+    <view class="login-footer">
+      <button class="btn-cancel" bindtap="onClose">取消</button>
+      <button class="btn-submit" bindtap="onLogin">登录</button>
+    </view>
+  </view>
+</view>
