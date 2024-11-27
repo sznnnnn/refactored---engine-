@@ -10,6 +10,15 @@ App({
     
     // 更新存储
     wx.setStorageSync('repairLogs', repairLogs)
+
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力');
+    } else {
+      wx.cloud.init({
+        env: 'my-app-dev-4gmyfe9h6ae04648',  // 使用你的云环境ID
+        traceUser: true,
+      });
+    }
   },
 
   // 全局数据
