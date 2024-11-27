@@ -1,4 +1,4 @@
-// pages/my/records/index.js
+// pages/admin/orders/index.js
 Page({
 
   /**

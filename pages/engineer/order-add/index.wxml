@@ -1,0 +1,80 @@
+<!--pages/engineer/order-add/index.wxml-->
+<view class="container">
+  <form bindsubmit="submitForm">
+    <view class="form-group">
+      <view class="form-item">
+        <text class="form-label required">客户名称</text>
+        <input 
+          class="form-input" 
+          name="customer" 
+          placeholder="请输入客户名称"
+          value="{{form.customer}}"
+        />
+      </view>
+      
+      <view class="form-item">
+        <text class="form-label required">联系电话</text>
+        <input 
+          class="form-input" 
+          name="phone" 
+          type="number"
+          maxlength="11"
+          placeholder="请输入联系电话"
+          value="{{form.phone}}"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="form-label required">设备型号</text>
+        <input 
+          class="form-input" 
+          name="equipment" 
+          placeholder="请输入设备型号"
+          value="{{form.equipment}}"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="form-label required">故障描述</text>
+        <textarea 
+          class="form-textarea" 
+          name="issue" 
+          placeholder="请输入故障描述"
+          value="{{form.issue}}"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="form-label required">预约时间</text>
+        <picker 
+          mode="multiSelector" 
+          value="{{dateTimeIndex}}" 
+          range="{{dateTimeArray}}" 
+          bindchange="onDateTimeChange"
+        >
+          <view class="picker-view {{form.appointTime ? '' : 'placeholder'}}">
+            {{form.appointTime || '请选择预约时间'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="form-label required">工作地点</text>
+        <view class="location-input">
+          <input 
+            class="form-input" 
+            name="location" 
+            placeholder="请输入工作地点"
+            value="{{form.location}}"
+          />
+          <view class="location-btn" bindtap="getLocation">
+            <text class="location-icon">📍</text>
+            <text>定位</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <button class="submit-btn" form-type="submit">提交报修单</button>
+  </form>
+</view>

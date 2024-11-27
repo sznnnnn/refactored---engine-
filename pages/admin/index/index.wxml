@@ -1,0 +1,70 @@
+<!--pages/admin/index/index.wxml-->
+<view class="container">
+  <!-- 顶部信息 -->
+  <view class="header">
+    <view class="company-info">
+      <image class="logo" src="/workwork/images/jianyou-logo.png" mode="aspectFit"/>
+      <text class="company-name">建友机械服务平台</text>
+    </view>
+    <view class="admin-info">
+      <text class="welcome">您好，管理员</text>
+      <text class="name">{{admin.name}}</text>
+    </view>
+  </view>
+
+  <!-- 统计概览 -->
+  <view class="stats-card">
+    <view class="stats-item">
+      <text class="stats-num">{{stats.todayOrders}}</text>
+      <text class="stats-label">今日工单</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{stats.pendingOrders}}</text>
+      <text class="stats-label">待处理</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{stats.activeEngineers}}</text>
+      <text class="stats-label">在线工程师</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-grid">
+    <view class="menu-item" bindtap="navigateTo" data-url="/pages/admin/orders/index">
+      <view class="menu-icon">📋</view>
+      <text class="menu-text">工单管理</text>
+    </view>
+    <view class="menu-item" bindtap="navigateTo" data-url="/pages/admin/engineers/index">
+      <view class="menu-icon">👥</view>
+      <text class="menu-text">工程师管理</text>
+    </view>
+    <view class="menu-item" bindtap="navigateTo" data-url="/pages/admin/statistics/index">
+      <view class="menu-icon">📊</view>
+      <text class="menu-text">数据统计</text>
+    </view>
+    <view class="menu-item" bindtap="showSettings">
+      <view class="menu-icon">⚙️</view>
+      <text class="menu-text">系统设置</text>
+    </view>
+  </view>
+
+  <!-- 最新工单 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">最新工单</text>
+      <text class="view-all" bindtap="viewAllOrders">查看全部</text>
+    </view>
+    <view class="order-list">
+      <view class="order-item" wx:for="{{recentOrders}}" wx:key="id">
+        <view class="order-main">
+          <text class="order-no">{{item.orderNo}}</text>
+          <text class="status {{item.status}}">{{item.statusText}}</text>
+        </view>
+        <view class="order-info">
+          <text class="customer">{{item.customer}}</text>
+          <text class="time">{{item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

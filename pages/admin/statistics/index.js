@@ -1,4 +1,4 @@
-// images/jianyou-logo.png.js
+// pages/admin/statistics/index.js
 Page({
 
   /**

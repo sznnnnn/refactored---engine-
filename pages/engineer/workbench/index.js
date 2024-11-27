@@ -1,12 +1,6 @@
 Page({
   data: {
     keyword: '',
-    stats: {
-      todayCount: 0,
-      weekCount: 0,
-      monthCount: 0
-    },
-    // 今日工单
     todayOrders: [
       {
         id: '001',
@@ -29,7 +23,6 @@ Page({
         appointTime: '14:00'
       }
     ],
-    // 可抢工单
     grabOrders: [
       {
         id: '003',
@@ -51,7 +44,6 @@ Page({
   },
 
   onLoad() {
-    this.loadStats()
   },
 
   // 搜索输入处理
@@ -77,18 +69,6 @@ Page({
     })
   },
 
-  // 加载统计数据
-  loadStats() {
-    // TODO: 从服务器获取统计数据
-    this.setData({
-      stats: {
-        todayCount: 5,
-        weekCount: 23,
-        monthCount: 89
-      }
-    })
-  },
-
   // 抢单
   onGrabOrder() {
     wx.navigateTo({
@@ -105,7 +85,7 @@ Page({
 
   // 查看全部今日工单
   viewAllToday() {
-    wx.navigateTo({
+    wx.switchTab({
       url: '/pages/engineer/order/index'
     })
   },
@@ -114,6 +94,38 @@ Page({
   viewAllGrab() {
     wx.navigateTo({
       url: '/pages/engineer/grab-orders/index'
+    })
+  },
+
+  // 添加订单
+  onAddOrder() {
+    wx.navigateTo({
+      url: '/pages/engineer/order-add/index'
+    })
+  },
+
+  // 抢单
+  grabOrder(e) {
+    const { id } = e.currentTarget.dataset
+    wx.showModal({
+      title: '确认抢单',
+      content: '是否确认抢此工单？',
+      success: (res) => {
+        if (res.confirm) {
+          wx.showLoading({ title: '处理中' })
+          // TODO: 调用抢单接口
+          setTimeout(() => {
+            wx.hideLoading()
+            wx.showToast({
+              title: '抢单成功',
+              icon: 'success'
+            })
+            // 更新列表
+            const grabOrders = this.data.grabOrders.filter(order => order.id !== id)
+            this.setData({ grabOrders })
+          }, 1000)
+        }
+      }
     })
   }
 }) 

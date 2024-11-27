@@ -1,40 +1,101 @@
 .container {
-  padding: 20rpx;
-  background: #f7f8fa;
+  padding: var(--spacing-sm);
+  background: var(--background);
   min-height: 100vh;
 }
 
 .order-item {
   background: #fff;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-bottom: 20rpx;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--card-shadow);
 }
 
-.order-main {
+.order-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16rpx;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.order-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
 }
 
 .order-no {
-  font-size: 30rpx;
-  font-weight: 500;
+  font-size: 26rpx;
+  color: var(--text-secondary);
 }
 
-.status {
+.time {
   font-size: 26rpx;
-  color: #1989fa;
+  color: var(--text-secondary);
+  background: var(--background);
+  padding: 4rpx 12rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.distance {
+  font-size: 26rpx;
+  color: var(--primary-color);
+  background: rgba(25, 137, 250, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.order-info {
+  padding: var(--spacing-sm) 0;
+  border-top: 1rpx solid var(--border-color);
 }
 
 .info-row {
   display: flex;
-  margin-bottom: 8rpx;
+  margin-bottom: var(--spacing-xs);
   font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
 }
 
 .label {
-  color: #999;
-  width: 120rpx;
+  color: var(--text-secondary);
+  width: 100rpx;
   flex-shrink: 0;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1rpx solid var(--border-color);
+}
+
+.grab-btn {
+  min-width: 160rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #ff9800;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: var(--border-radius-md);
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grab-btn:active {
+  opacity: 0.9;
+}
+
+.empty-tip {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+  padding: var(--spacing-xl) 0;
+  opacity: 0.8;
 } 

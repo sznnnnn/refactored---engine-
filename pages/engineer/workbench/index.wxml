@@ -13,28 +13,20 @@
     </view>
   </view>
 
-  <!-- 工作统计 -->
-  <view class="stats-card">
-    <view class="stats-item">
-      <text class="stats-num">{{stats.todayCount}}</text>
-      <text class="stats-label">今日工单</text>
-    </view>
-    <view class="stats-item">
-      <text class="stats-num">{{stats.weekCount}}</text>
-      <text class="stats-label">本周工单</text>
-    </view>
-    <view class="stats-item">
-      <text class="stats-num">{{stats.monthCount}}</text>
-      <text class="stats-label">本月工单</text>
+  <!-- 快捷功能 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="onAddOrder">
+      <text class="action-icon">＋</text>
+      <text class="action-text">添加订单</text>
     </view>
   </view>
 
-  <!-- 今日工单 -->
+  <!-- 今日任务 -->
   <view class="section today-section">
     <view class="section-header">
       <view class="header-left">
         <text class="section-icon">📋</text>
-        <text class="section-title">今日工单</text>
+        <text class="section-title">今日任务</text>
       </view>
       <text class="view-all" bindtap="viewAllToday">查看全部</text>
     </view>
@@ -74,7 +66,7 @@
             <text class="customer">{{item.customer}}</text>
             <text class="distance">{{item.distance}}km</text>
           </view>
-          <text class="tag tag-warning">待抢单</text>
+          <button class="grab-btn" bindtap="grabOrder" data-id="{{item.id}}">抢单</button>
         </view>
         <view class="order-brief">
           <text>{{item.equipment}}</text>

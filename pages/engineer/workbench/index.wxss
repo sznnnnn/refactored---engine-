@@ -29,33 +29,6 @@
   color: var(--text-main);
 }
 
-/* 统计卡片 */
-.stats-card {
-  display: flex;
-  justify-content: space-around;
-  padding: var(--spacing-md);
-  background: var(--primary-gradient);
-  border-radius: var(--border-radius-lg);
-  margin-bottom: var(--spacing-md);
-  color: #fff;
-}
-
-.stats-item {
-  text-align: center;
-}
-
-.stats-num {
-  display: block;
-  font-size: 40rpx;
-  font-weight: 500;
-  margin-bottom: var(--spacing-xs);
-}
-
-.stats-label {
-  font-size: 24rpx;
-  opacity: 0.9;
-}
-
 /* 工单列表 */
 .section {
   background: #fff;
@@ -213,4 +186,61 @@
 
 .view-all:active {
   opacity: 0.7;
+}
+
+/* 快捷功能区域 */
+.quick-actions {
+  display: flex;
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 统一使用蓝色渐变 */
+.action-item {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(25, 137, 250, 0.05), rgba(57, 187, 255, 0.1));
+  border: 1rpx solid rgba(25, 137, 250, 0.15);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+}
+
+.action-item:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.action-icon {
+  font-size: 56rpx;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.action-text {
+  font-size: 28rpx;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* 抢单按钮样式 */
+.grab-btn {
+  min-width: 120rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  background: #ff9800;
+  color: #fff;
+  font-size: 26rpx;
+  border-radius: var(--border-radius-sm);
+  padding: 0 24rpx;
+  margin: 0;
+  transition: opacity 0.3s ease;
+}
+
+.grab-btn:active {
+  opacity: 0.9;
 } 

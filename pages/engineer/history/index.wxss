@@ -1,43 +1,188 @@
 .container {
-  padding: 20rpx;
-  background: #f7f8fa;
+  padding: var(--spacing-sm);
+  background: var(--background);
   min-height: 100vh;
 }
 
-.order-item {
-  background: #fff;
-  border-radius: 12rpx;
-  padding: 20rpx;
-  margin-bottom: 20rpx;
-}
-
-.order-main {
+/* 分类标签 */
+.filter-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 16rpx;
+  background: #fff;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: 0 -20rpx var(--spacing-md);
+  box-shadow: var(--card-shadow);
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-.order-no {
-  font-size: 30rpx;
+.tab-item {
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  color: var(--primary-color);
   font-weight: 500;
 }
 
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 4rpx;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+/* 添加数量样式 */
+.count {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  margin-left: 4rpx;
+}
+
+.tab-item.active .count {
+  color: var(--primary-color);
+  opacity: 0.9;
+}
+
+/* 工单卡片 */
+.order-item {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--card-shadow);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.order-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.order-no {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.time {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  background: var(--background);
+  padding: 4rpx 12rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+/* 状态标签 */
 .status {
   font-size: 26rpx;
+  padding: 6rpx 16rpx;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+}
+
+.status.timeout {
+  color: #ff4d4f;
+  background: #fff1f0;
 }
 
 .status.completed {
   color: #52c41a;
+  background: #f6ffed;
+}
+
+.status.suspended {
+  color: #faad14;
+  background: #fff7e6;
+}
+
+.status.pending {
+  color: #1989fa;
+  background: #e6f7ff;
+}
+
+/* 工单信息 */
+.order-info {
+  padding: var(--spacing-sm) 0;
+  border-top: 1rpx solid var(--border-color);
 }
 
 .info-row {
   display: flex;
-  margin-bottom: 8rpx;
+  margin-bottom: var(--spacing-xs);
   font-size: 26rpx;
+  line-height: 1.6;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
 }
 
 .label {
-  color: #999;
-  width: 120rpx;
+  color: var(--text-secondary);
+  width: 100rpx;
   flex-shrink: 0;
+}
+
+/* 空状态提示 */
+.empty-tip {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+  padding: var(--spacing-xl) 0;
+  opacity: 0.8;
+}
+
+/* 列表头部 */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.list-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.view-all {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  padding: 8rpx 16rpx;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  background: var(--background);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.3s ease;
+}
+
+.view-all:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+.arrow {
+  font-size: 24rpx;
+  color: var(--text-secondary);
 } 

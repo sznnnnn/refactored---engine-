@@ -1,0 +1,187 @@
+/* pages/admin/index/index.wxss */
+.container {
+  padding: var(--spacing-sm);
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* 顶部信息 */
+.header {
+  background: var(--primary-gradient);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  color: #fff;
+  margin-bottom: var(--spacing-md);
+}
+
+.company-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.logo {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.company-name {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.welcome {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.name {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+/* 统计卡片 */
+.stats-card {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--card-shadow);
+}
+
+.stats-item {
+  text-align: center;
+}
+
+.stats-num {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 4rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+/* 功能菜单 */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.menu-item {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
+
+.menu-icon {
+  font-size: 48rpx;
+  margin-bottom: var(--spacing-xs);
+}
+
+.menu-text {
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+/* 最新工单 */
+.section {
+  background: #fff;
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.view-all {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.order-item {
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4rpx;
+}
+
+.order-no {
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+.status {
+  font-size: 24rpx;
+  padding: 2rpx 12rpx;
+  border-radius: var(--border-radius-sm);
+}
+
+.status.pending {
+  color: #ff9800;
+  background: #fff7e6;
+}
+
+.status.processing {
+  color: #1989fa;
+  background: #e6f7ff;
+}
+
+.status.completed {
+  color: #52c41a;
+  background: #f6ffed;
+}
+
+.order-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customer {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.time {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}

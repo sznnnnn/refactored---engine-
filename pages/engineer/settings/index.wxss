@@ -29,7 +29,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-md);
   position: relative;
 }
 
@@ -50,17 +50,21 @@
 .setting-left {
   flex: 1;
   padding-right: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
 }
 
 .setting-label {
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: var(--text-main);
-  margin-bottom: 4rpx;
+  font-weight: 500;
 }
 
 .setting-desc {
   font-size: 24rpx;
   color: var(--text-secondary);
+  opacity: 0.8;
 }
 
 .picker-text {
