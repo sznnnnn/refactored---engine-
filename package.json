@@ -1,19 +1,5 @@
 {
   "name": "engineering-repair-miniprogram",
-  "version": "0.1.5",
-  "description": "工程设备报修小程序",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "微信小程序",
-    "工程设备",
-    "报修系统"
-  ],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@vant/weapp": "^1.10.19"
-  }
+  "version": "0.1.7",
+  "description": "工程设备报修小程序"
 }

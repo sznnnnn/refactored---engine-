@@ -14,7 +14,7 @@
   </view>
 
   <!-- 工作统计 -->
-  <view class="stats-section">
+  <view class="stats-card">
     <view class="stats-item">
       <text class="stats-num">{{stats.todayCount}}</text>
       <text class="stats-label">今日工单</text>
@@ -29,19 +29,106 @@
     </view>
   </view>
 
-  <!-- 功能区 -->
-  <view class="function-section">
-    <!-- 抢单入口 -->
-    <view class="function-card" bindtap="onGrabOrder">
-      <icon type="info" size="40" color="#1989fa"/>
-      <text class="function-title">抢单</text>
-      <text class="function-desc">查看可抢工单</text>
+  <!-- 今日工单 -->
+  <view class="section today-section">
+    <view class="section-header">
+      <view class="header-left">
+        <text class="section-icon">📋</text>
+        <text class="section-title">今日工单</text>
+      </view>
+      <text class="section-count">2个工单</text>
     </view>
-    <!-- 历史查询 -->
-    <view class="function-card" bindtap="onHistorySearch">
-      <icon type="search" size="40" color="#1989fa"/>
-      <text class="function-title">历史查询</text>
-      <text class="function-desc">查看历史工单</text>
+    <view class="order-list">
+      <view class="order-item" wx:for="{{todayOrders}}" wx:key="id">
+        <view class="order-main">
+          <view class="order-left">
+            <text class="order-no">{{item.orderNo}}</text>
+            <text class="order-time">预约：{{item.appointTime}}</text>
+          </view>
+          <text class="tag {{item.status === 'pending' ? 'tag-warning' : 'tag-primary'}}">
+            {{item.statusText}}
+          </text>
+        </view>
+        <view class="order-info">
+          <view class="info-row">
+            <text class="label">客户：</text>
+            <text>{{item.customer}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">设备：</text>
+            <text>{{item.equipment}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">故障：</text>
+            <text>{{item.issue}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">地点：</text>
+            <view class="location-wrap">
+              <text>{{item.location}}</text>
+              <view class="copy-btn" catchtap="copyLocation" data-location="{{item.location}}">
+                复制
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="order-actions">
+          <button class="btn btn-outline" bindtap="makeCall" data-phone="{{item.phone}}">
+            联系客户
+          </button>
+          <button class="btn btn-primary" bindtap="startOrder" data-id="{{item.id}}" wx:if="{{item.status === 'pending'}}">
+            开始处理
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 可抢工单 -->
+  <view class="section grab-section">
+    <view class="section-header">
+      <view class="header-left">
+        <text class="section-icon">🔔</text>
+        <text class="section-title">可抢工单</text>
+      </view>
+      <text class="section-count">3个工单</text>
+    </view>
+    <view class="order-list">
+      <view class="order-item" wx:for="{{grabOrders}}" wx:key="id">
+        <view class="order-main">
+          <view class="order-left">
+            <text class="order-no">{{item.orderNo}}</text>
+            <text class="order-time">{{item.createTime}}</text>
+          </view>
+          <text class="tag tag-warning">待抢单</text>
+        </view>
+        <view class="order-info">
+          <view class="info-row">
+            <text class="label">客户：</text>
+            <text>{{item.customer}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">设备：</text>
+            <text>{{item.equipment}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">故障：</text>
+            <text>{{item.issue}}</text>
+          </view>
+          <view class="info-row">
+            <text class="label">地点：</text>
+            <view class="location-wrap">
+              <text>{{item.location}}</text>
+              <text class="distance">{{item.distance}}km</text>
+            </view>
+          </view>
+        </view>
+        <view class="order-actions">
+          <button class="btn btn-primary" bindtap="grabOrder" data-id="{{item.id}}">
+            抢单
+          </button>
+        </view>
+      </view>
     </view>
   </view>
 </view> 

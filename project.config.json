@@ -39,8 +39,6 @@
       "outputPath": ""
     },
     "requestDomain": [
-      "https://6d79-my-app-dev-4gmyfe9h6ae04648-1332211251.tcb.qcloud.la",
-      "https://tcb-api.tencentcloudapi.com",
       "https://apis.map.qq.com"
     ]
   },
@@ -52,8 +50,5 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  },
-  "cloudfunctionRoot": "cloudfunctions/",
-  "cloud": true,
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/"
+  }
 }

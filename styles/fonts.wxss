@@ -1,0 +1,10 @@
+/* 系统默认字体 */
+page {
+  /* 
+    -apple-system: iOS系统默认字体
+    PingFang SC: 苹方字体(iOS)
+    Microsoft YaHei: 微软雅黑(Windows)
+    sans-serif: 无衬线字体兜底
+  */
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+} 

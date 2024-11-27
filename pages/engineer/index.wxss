@@ -6,91 +6,163 @@
 }
 
 .section {
-  margin-bottom: 30rpx;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20rpx;
-}
-
-.section-title {
-  font-size: 32rpx;
-  font-weight: 500;
-}
-
-.section-count {
-  font-size: 26rpx;
-  color: #999;
-}
-
-.order-item {
   background: #fff;
   border-radius: 12rpx;
   padding: 20rpx;
   margin-bottom: 20rpx;
+  position: relative;
+  overflow: hidden;
 }
 
-.order-main {
+.section::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6rpx;
+  background: inherit;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 20rpx;
+  padding: 0 10rpx;
+  border-left: 6rpx solid transparent;
+  padding-left: 16rpx;
+  position: relative;
+  font-size: 32rpx;
+}
+
+.section-title text:nth-child(2) {
+  font-weight: 600;
+  color: #333;
+}
+
+.icon {
+  font-size: 32rpx;
+}
+
+.count {
+  margin-left: auto;
+  font-size: 26rpx;
+  color: #999;
+  background: #f7f8fa;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.order-item {
+  background: #fff;
+  border: 1rpx solid #eee;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.order-item:active {
+  transform: scale(0.99);
+  box-shadow: 0 0 4rpx rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16rpx;
+  align-items: center;
+  margin-bottom: 12rpx;
 }
 
 .order-left {
   display: flex;
   align-items: center;
-  gap: 20rpx;
+  gap: 12rpx;
 }
 
 .order-no {
-  font-size: 30rpx;
-  font-weight: 500;
+  font-size: 26rpx;
+  color: #999;
+  font-weight: normal;
 }
 
-.appoint-time {
+.appoint-row {
+  margin-bottom: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.time {
   font-size: 26rpx;
   color: #666;
+  background: #f7f8fa;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
 }
 
 .status {
   font-size: 26rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  font-weight: 500;
 }
 
 .status.pending {
   color: #ff4d4f;
+  background: #fff1f0;
 }
 
 .status.processing {
   color: #1989fa;
+  background: #e6f7ff;
 }
 
 .info-row {
   display: flex;
-  margin-bottom: 8rpx;
+  margin-bottom: 12rpx;
   font-size: 26rpx;
+  line-height: 1.6;
 }
 
 .label {
   color: #999;
-  width: 120rpx;
+  width: 100rpx;
   flex-shrink: 0;
 }
 
-.order-actions {
+.copy-btn {
+  margin-left: auto;
+  color: #1989fa;
+  background: rgba(25, 137, 250, 0.1);
+  padding: 4rpx 16rpx;
+  border-radius: 4rpx;
+  font-size: 24rpx;
+}
+
+.order-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 20rpx;
+  gap: 16rpx;
   margin-top: 20rpx;
   padding-top: 20rpx;
   border-top: 1rpx solid #eee;
 }
 
+.contact-btn {
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 6rpx;
+  background: #f5f5f5;
+  color: #666;
+  line-height: 1.4;
+  margin: 0;
+}
+
 .action-btn {
   font-size: 26rpx;
-  padding: 12rpx 30rpx;
+  padding: 12rpx 24rpx;
   border-radius: 6rpx;
   background: #1989fa;
   color: #fff;
@@ -98,47 +170,20 @@
   margin: 0;
 }
 
-/* 局部导航样式 */
-.nav-bar {
-  display: flex;
-  background: #fff;
-  padding: 0 30rpx;
-  margin-bottom: 20rpx;
-  border-radius: 8rpx;
+.section:nth-child(1) {
+  border-left: 6rpx solid #1989fa;
 }
 
-.nav-item {
-  padding: 20rpx 30rpx;
-  font-size: 28rpx;
-  color: #666;
-  position: relative;
-}
-
-.nav-item.active {
+.section:nth-child(1) .status.processing {
   color: #1989fa;
+  background: #e6f7ff;
 }
 
-.nav-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4rpx;
-  background: #1989fa;
+.section:nth-child(2) {
+  border-left: 6rpx solid #ff9800;
 }
 
-.location-wrap {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.copy-btn {
-  font-size: 24rpx;
-  color: #1989fa;
-  padding: 4rpx 16rpx;
-  background: rgba(25, 137, 250, 0.1);
-  border-radius: 4rpx;
+.section:nth-child(2) .status.pending {
+  color: #ff9800;
+  background: #fff7e6;
 }

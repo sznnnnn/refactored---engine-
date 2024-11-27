@@ -1,26 +1,43 @@
 <!--pages/login/login.wxml-->
-<view class="login-container">
-  <view class="login-content">
-    <view class="login-header">
-      <text>服务人员登录</text>
-      <view class="close" bindtap="onClose">×</view>
-    </view>
-    
-    <view class="login-body">
-      <view class="input-group">
-        <text>姓名</text>
-        <input type="text" placeholder="请输入姓名" model:value="{{name}}" />
+<view class="container">
+  <view class="login-header">
+    <image class="logo" src="/assets/images/logo.png" mode="aspectFit"/>
+    <text class="title">工程设备报修</text>
+    <text class="subtitle">服务工程师端</text>
+  </view>
+
+  <view class="login-card">
+    <view class="form">
+      <view class="form-item">
+        <text class="label">姓名</text>
+        <input 
+          class="input"
+          type="text"
+          placeholder="请输入姓名"
+          value="{{name}}"
+          disabled="{{true}}"
+        />
       </view>
-      
-      <view class="input-group">
-        <text>手机号</text>
-        <input type="number" placeholder="请输入手机号" model:value="{{phone}}" maxlength="11" />
+
+      <view class="form-item">
+        <text class="label">手机号</text>
+        <input 
+          class="input"
+          type="number"
+          placeholder="请输入手机号"
+          value="{{phone}}"
+          disabled="{{true}}"
+          maxlength="11"
+        />
       </view>
+
+      <button class="login-btn" loading="{{true}}">
+        登录中...
+      </button>
     </view>
-    
-    <view class="login-footer">
-      <button class="btn-cancel" bindtap="onClose">取消</button>
-      <button class="btn-submit" bindtap="onLogin">登录</button>
-    </view>
+  </view>
+
+  <view class="footer">
+    <text class="copyright">© 2024 建友机械</text>
   </view>
 </view>

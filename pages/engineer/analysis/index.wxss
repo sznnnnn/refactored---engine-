@@ -1,0 +1,172 @@
+.container {
+  min-height: 100vh;
+  background: #f7f8fa;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+/* 筛选栏 */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 20rpx 0;
+  background: #f7f8fa;
+}
+
+.date-picker {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.picker-arrow {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 数据概览 */
+.overview-card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.overview-item {
+  text-align: center;
+}
+
+.overview-num {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 500;
+  color: #1989fa;
+  margin-bottom: 8rpx;
+}
+
+.overview-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 图表卡片 */
+.chart-card {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.chart-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.chart-legend {
+  display: flex;
+  gap: 20rpx;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.legend-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+}
+
+.legend-dot.total {
+  background: #1989fa;
+}
+
+.legend-dot.completed {
+  background: #52c41a;
+}
+
+.chart-content {
+  height: 400rpx;
+  width: 100%;
+}
+
+.chart-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 28rpx;
+  background: #f7f8fa;
+  border-radius: 8rpx;
+}
+
+/* 类型分布 */
+.type-list {
+  margin-top: 20rpx;
+}
+
+.type-item {
+  margin-bottom: 30rpx;
+}
+
+.type-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.type-name {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.type-count {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.type-bar {
+  height: 12rpx;
+  background: #f0f0f0;
+  border-radius: 6rpx;
+  overflow: hidden;
+  margin-bottom: 8rpx;
+}
+
+.type-bar-inner {
+  height: 100%;
+  background: #1989fa;
+  border-radius: 6rpx;
+}
+
+.type-percentage {
+  font-size: 24rpx;
+  color: #999;
+}
+
+ec-canvas {
+  width: 100%;
+  height: 100%;
+} 

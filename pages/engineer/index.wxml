@@ -2,21 +2,24 @@
 <view class="container">
   <!-- 今日工作安排 -->
   <view class="section">
-    <view class="section-header">
-      <text class="section-title">今日工作安排</text>
-      <text class="section-count">{{todayOrders.length}}个工单</text>
+    <view class="section-title">
+      <text class="icon">📅</text>
+      <text>今日工作安排</text>
+      <text class="count">2个工单</text>
     </view>
+
     <view class="order-list">
-      <view class="order-item" 
-            wx:for="{{todayOrders}}" 
-            wx:key="id">
-        <view class="order-main" bindtap="onOrderTap" data-id="{{item.id}}">
-          <view class="order-left">
-            <text class="order-no">{{item.orderNo}}</text>
-            <text class="appoint-time">预约：{{item.appointTime}}</text>
+      <view class="order-item" wx:for="{{todayOrders}}" wx:key="id">
+        <view class="order-header">
+          <view class="order-no">
+            <text>{{item.orderNo}}</text>
+            <text class="time">预约：{{item.appointTime}}</text>
           </view>
-          <text class="status {{item.status}}">{{item.statusText}}</text>
+          <text class="status {{item.status === 'pending' ? 'pending' : 'processing'}}">
+            {{item.statusText}}
+          </text>
         </view>
+
         <view class="order-info">
           <view class="info-row">
             <text class="label">客户：</text>
@@ -32,27 +35,15 @@
           </view>
           <view class="info-row">
             <text class="label">地点：</text>
-            <view class="location-wrap">
-              <text>{{item.location}}</text>
-              <view class="copy-btn" 
-                    catchtap="copyLocation" 
-                    data-location="{{item.location}}">
-                复制
-              </view>
-            </view>
+            <text>{{item.location}}</text>
+            <text class="copy-btn" catchtap="copyLocation" data-location="{{item.location}}">复制</text>
           </view>
         </view>
-        <view class="order-actions">
-          <button class="action-btn" 
-                  bindtap="startOrder" 
-                  data-id="{{item.id}}"
-                  wx:if="{{item.status === 'pending'}}">
+
+        <view class="order-footer">
+          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">联系客户</button>
+          <button class="action-btn" bindtap="startOrder" data-id="{{item.id}}" wx:if="{{item.status === 'pending'}}">
             开始处理
-          </button>
-          <button class="action-btn" 
-                  bindtap="makeCall" 
-                  data-phone="{{item.phone}}">
-            联系客户
           </button>
         </view>
       </view>
@@ -61,18 +52,19 @@
 
   <!-- 待办工单 -->
   <view class="section">
-    <view class="section-header">
-      <text class="section-title">待办工单</text>
-      <text class="section-count">{{pendingOrders.length}}个工单</text>
+    <view class="section-title">
+      <text class="icon">📝</text>
+      <text>待办工单</text>
+      <text class="count">2个工单</text>
     </view>
+
     <view class="order-list">
-      <view class="order-item" 
-            wx:for="{{pendingOrders}}" 
-            wx:key="id">
-        <view class="order-main" bindtap="onOrderTap" data-id="{{item.id}}">
+      <view class="order-item" wx:for="{{pendingOrders}}" wx:key="id">
+        <view class="order-header">
           <text class="order-no">{{item.orderNo}}</text>
-          <text class="status {{item.status}}">{{item.statusText}}</text>
+          <text class="status pending">待处理</text>
         </view>
+
         <view class="order-info">
           <view class="info-row">
             <text class="label">客户：</text>
@@ -88,27 +80,14 @@
           </view>
           <view class="info-row">
             <text class="label">地点：</text>
-            <view class="location-wrap">
-              <text>{{item.location}}</text>
-              <view class="copy-btn" 
-                    catchtap="copyLocation" 
-                    data-location="{{item.location}}">
-                复制
-              </view>
-            </view>
+            <text>{{item.location}}</text>
+            <text class="copy-btn" catchtap="copyLocation" data-location="{{item.location}}">复制</text>
           </view>
         </view>
-        <view class="order-actions">
-          <button class="action-btn" 
-                  bindtap="startOrder" 
-                  data-id="{{item.id}}">
-            开始处理
-          </button>
-          <button class="action-btn" 
-                  bindtap="makeCall" 
-                  data-phone="{{item.phone}}">
-            联系客户
-          </button>
+
+        <view class="order-footer">
+          <button class="contact-btn" bindtap="makeCall" data-phone="{{item.phone}}">联系客户</button>
+          <button class="action-btn" bindtap="startOrder" data-id="{{item.id}}">开始处理</button>
         </view>
       </view>
     </view>

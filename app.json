@@ -2,14 +2,14 @@
   "pages": [
     "pages/engineer/index",
     "pages/engineer/workbench",
-    "pages/engineer/profile",
+    "pages/engineer/profile/index",
     "pages/engineer/order-detail/index",
-    "pages/engineer/grab-orders/index",
-    "pages/engineer/history/index",
-    "pages/index/index",
-    "pages/login/login",
     "pages/engineer/order-process/index",
-    "pages/engineer/order-complete/index"
+    "pages/engineer/order-complete/index",
+    "pages/engineer/history/index",
+    "pages/engineer/settings/index",
+    "pages/engineer/analysis/index",
+    "pages/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,15 +25,15 @@
     "list": [
       {
         "pagePath": "pages/engineer/index",
-        "text": "工单列表"
+        "text": "工单"
       },
       {
         "pagePath": "pages/engineer/workbench",
-        "text": "工作台"
+        "text": "🔧工作台"
       },
       {
-        "pagePath": "pages/engineer/profile",
-        "text": "我的"
+        "pagePath": "pages/engineer/profile/index",
+        "text": "👤我的"
       }
     ]
   },

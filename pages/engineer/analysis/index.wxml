@@ -1,0 +1,44 @@
+<view class="container">
+  <!-- 时间选择器 -->
+  <view class="filter-bar">
+    <picker mode="date" fields="month" value="{{currentDate}}" bindchange="onDateChange">
+      <view class="date-picker">
+        <text>{{currentDate}}</text>
+        <text class="picker-arrow">▼</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 数据概览 -->
+  <view class="overview-card">
+    <view class="overview-item">
+      <text class="overview-num">{{overview.totalCount}}</text>
+      <text class="overview-label">总工单数</text>
+    </view>
+    <view class="overview-item">
+      <text class="overview-num">{{overview.completedCount}}</text>
+      <text class="overview-label">已完成</text>
+    </view>
+    <view class="overview-item">
+      <text class="overview-num">{{overview.completionRate}}%</text>
+      <text class="overview-label">完成率</text>
+    </view>
+  </view>
+
+  <!-- 类型分布 -->
+  <view class="chart-card">
+    <view class="chart-title">故障类型分布</view>
+    <view class="type-list">
+      <view class="type-item" wx:for="{{typeStats}}" wx:key="type">
+        <view class="type-info">
+          <text class="type-name">{{item.type}}</text>
+          <text class="type-count">{{item.count}}单</text>
+        </view>
+        <view class="type-bar">
+          <view class="type-bar-inner" style="width: {{item.percentage}}%"></view>
+        </view>
+        <text class="type-percentage">{{item.percentage}}%</text>
+      </view>
+    </view>
+  </view>
+</view> 

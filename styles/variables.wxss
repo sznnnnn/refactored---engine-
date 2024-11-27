@@ -1,0 +1,33 @@
+/* 主题色 */
+page {
+  /* 品牌色 */
+  --primary-color: #1989fa;
+  --primary-light: #39bbff;
+  --primary-gradient: linear-gradient(135deg, #1989fa, #39bbff);
+
+  /* 功能色 */
+  --success-color: #52c41a;
+  --warning-color: #ff9800;
+  --error-color: #ff4d4f;
+
+  /* 中性色 */
+  --text-main: #333333;
+  --text-secondary: #666666;
+  --text-placeholder: #999999;
+  --border-color: #eeeeee;
+  --background: #f7f8fa;
+
+  /* 卡片阴影 */
+  --card-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  
+  /* 圆角 */
+  --border-radius-sm: 8rpx;
+  --border-radius-md: 12rpx;
+  --border-radius-lg: 16rpx;
+  
+  /* 间距 */
+  --spacing-xs: 10rpx;
+  --spacing-sm: 20rpx;
+  --spacing-md: 30rpx;
+  --spacing-lg: 40rpx;
+} 
