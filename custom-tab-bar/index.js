@@ -1,29 +1,37 @@
 Component({
   data: {
-    active: 0,
+    selected: 0,
     list: [
       {
-        icon: '📋',
-        text: '订单',
-        url: '/pages/order/index'
+        pagePath: "/pages/admin/index/index",
+        text: "工作台",
+        icon: ""
       },
       {
-        icon: '🔧',
-        text: '工作台',
-        url: '/pages/workbench/index'
+        pagePath: "/pages/admin/orders/index",
+        text: "工单管理",
+        icon: "📋"
       },
       {
-        icon: '👤',
-        text: '我的',
-        url: '/pages/profile/index'
+        pagePath: "/pages/admin/engineers/index",
+        text: "工程师",
+        icon: "👥"
+      },
+      {
+        pagePath: "/pages/admin/statistics/index",
+        text: "统计",
+        icon: "📊"
       }
     ]
   },
   methods: {
-    onChange(event) {
-      const index = event.detail;
-      const url = this.data.list[index].url;
-      wx.switchTab({ url });
+    switchTab(e) {
+      const data = e.currentTarget.dataset
+      const url = data.path
+      wx.switchTab({ url })
+      this.setData({
+        selected: data.index
+      })
     }
   }
-}); 
+}) 

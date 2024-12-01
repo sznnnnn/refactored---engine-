@@ -1,5 +1,9 @@
 {
   "name": "engineering-repair-miniprogram",
   "version": "0.2.1",
-  "description": "工程设备报修小程序"
+  "description": "工程设备报修小程序",
+  "dependencies": {
+    "weui-miniprogram": "^1.2.7",
+    "wx-server-sdk": "^3.0.1"
+  }
 }

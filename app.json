@@ -1,11 +1,13 @@
 {
   
     "pages": [
-      "pages/login/login",
       "pages/admin/index/index",
       "pages/admin/orders/index",
       "pages/admin/engineers/index",
       "pages/admin/statistics/index",
+      "pages/admin/engineers/edit/index",
+      "pages/admin/engineers/orders/index",
+      "pages/login/login",
       "pages/engineer/order/index",
       "pages/engineer/workbench/index",
       "pages/engineer/profile/index",
@@ -25,7 +27,7 @@
       "navigationBarTextStyle": "black"
     },
     "tabBar": {
-      "custom": false,
+      "custom": true,
       "color": "#666666",
       "selectedColor": "#1989fa",
       "backgroundColor": "#ffffff",
@@ -33,23 +35,19 @@
       "list": [
         {
           "pagePath": "pages/admin/index/index",
-          "text": "工作台",
-          "text_": "🏠"
+          "text": "工作台"
         },
         {
           "pagePath": "pages/admin/orders/index",
-          "text": "工单管理",
-          "text_": "📋"
+          "text": "工单管理"
         },
         {
           "pagePath": "pages/admin/engineers/index",
-          "text": "工程师",
-          "text_": "👥"
+          "text": "工程师"
         },
         {
           "pagePath": "pages/admin/statistics/index",
-          "text": "统计",
-          "text_": "📊"
+          "text": "统计"
         }
       ]
     },

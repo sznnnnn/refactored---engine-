@@ -1,15 +1,25 @@
-const config = {
-  // 开发环境配置
+const env = {
   development: {
-    baseUrl: 'http://localhost:3000',
-    env: 'development'
+    baseURL: 'http://localhost:3000',
   },
-  // 生产环境配置
   production: {
-    baseUrl: 'https://api.example.com',
-    env: 'production'
+    baseURL: 'https://api.yourcompany.com', // 生产环境域名
+  },
+  test: {
+    baseURL: 'https://test-api.yourcompany.com', // 测试环境域名
   }
 }
 
-// 根据环境导出相应配置
-export default config[process.env.NODE_ENV || 'development'] 
+const getEnvConfig = () => {
+  const accountInfo = wx.getAccountInfoSync()
+  const envVersion = accountInfo.miniProgram.envVersion
+  
+  switch (envVersion) {
+    case 'develop': return env.development
+    case 'trial': return env.test
+    case 'release': return env.production
+    default: return env.development
+  }
+}
+
+module.exports = getEnvConfig() 

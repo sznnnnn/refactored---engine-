@@ -1,2 +1,142 @@
 <!--pages/admin/statistics/index.wxml-->
-<text>pages/admin/statistics/index.wxml</text>
+<view class="container">
+  <!-- 标签页切换 -->
+  <view class="tabs">
+    <view 
+      class="tab-item {{activeTab === 'orders' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="orders"
+    >
+      工单统计
+    </view>
+    <view 
+      class="tab-item {{activeTab === 'engineers' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="engineers"
+    >
+      工程师统计
+    </view>
+  </view>
+
+  <!-- 工单统计 -->
+  <view class="stats-content" hidden="{{activeTab !== 'orders'}}">
+    <!-- 概览数据 -->
+    <view class="overview-cards">
+      <view class="card">
+        <view class="card-title">总工单</view>
+        <view class="card-value">{{orderStats.total}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">今日工单</view>
+        <view class="card-value">{{orderStats.today}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">本周工单</view>
+        <view class="card-value">{{orderStats.week}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">本月工单</view>
+        <view class="card-value">{{orderStats.month}}</view>
+      </view>
+    </view>
+
+    <!-- 状态分布 -->
+    <view class="section">
+      <view class="section-title">工单状态分布</view>
+      <view class="status-distribution">
+        <view 
+          class="status-item" 
+          wx:for="{{orderStats.statusDistribution}}" 
+          wx:key="name"
+        >
+          <view class="status-bar">
+            <view 
+              class="status-bar-inner" 
+              style="width: {{item.value}}%; background: {{item.color}}"
+            ></view>
+          </view>
+          <view class="status-info">
+            <text>{{item.name}}</text>
+            <text>{{item.value}}%</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时段分布 -->
+    <view class="section">
+      <view class="section-title">工单时段分布</view>
+      <view class="time-distribution">
+        <view 
+          class="time-item" 
+          wx:for="{{orderStats.timeDistribution}}" 
+          wx:key="time"
+        >
+          <view class="time-bar" style="height: {{item.value * 2}}rpx"></view>
+          <view class="time-label">{{item.time}}</view>
+          <view class="time-value">{{item.value}}%</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 趋势图 -->
+    <view class="section">
+      <view class="section-title">近7天工单趋势</view>
+      <view class="trend-chart">
+        <view 
+          class="trend-item" 
+          wx:for="{{orderStats.trend}}" 
+          wx:key="date"
+        >
+          <view class="trend-bar" style="height: {{item.count * 10}}rpx"></view>
+          <view class="trend-date">{{item.date}}</view>
+          <view class="trend-count">{{item.count}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 工程师统计 -->
+  <view class="stats-content" hidden="{{activeTab !== 'engineers'}}">
+    <!-- 概览数据 -->
+    <view class="overview-cards">
+      <view class="card">
+        <view class="card-title">总人数</view>
+        <view class="card-value">{{engineerStats.total}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">在线</view>
+        <view class="card-value">{{engineerStats.online}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">工作中</view>
+        <view class="card-value">{{engineerStats.busy}}</view>
+      </view>
+      <view class="card">
+        <view class="card-title">平均评分</view>
+        <view class="card-value">{{engineerStats.avgScore}}</view>
+      </view>
+    </view>
+
+    <!-- 工程师排行 -->
+    <view class="section">
+      <view class="section-title">工程师排行榜</view>
+      <view class="engineer-list">
+        <view 
+          class="engineer-item" 
+          wx:for="{{engineerStats.performance}}" 
+          wx:key="name"
+        >
+          <view class="rank">{{index + 1}}</view>
+          <view class="engineer-info">
+            <view class="engineer-name">{{item.name}}</view>
+            <view class="engineer-stats">
+              <text>工单: {{item.orders}}</text>
+              <text>评分: {{item.score}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,9 +1,8 @@
 // pages/admin/orders/index.js
-Page({
+const app = getApp()
+const orderService = require('../../../services/order')
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     keyword: '',
     status: 'all',
@@ -14,69 +13,134 @@ Page({
       completed: 0
     },
     orders: [],
-    filteredOrders: []
+    filteredOrders: [],
+    loading: false,
+    currentPage: 1,
+    pageSize: 10,
+    hasMore: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad() {
     this.loadOrders()
+    this.loadStats()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-    // 页面卸载时清除定时器
-    if (this.durationTimer) {
-      clearInterval(this.durationTimer)
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1
+      })
     }
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-    this.loadOrders()
+  // 导入工单数据
+  async importWorkOrders() {
+    try {
+      wx.showLoading({ title: '导入中...' })
+      
+      // 调用云函数
+      const result = await wx.cloud.callFunction({
+        name: 'importWorkOrders'
+      })
+      
+      if (result.result.success) {
+        wx.showToast({
+          title: '导入成功',
+          icon: 'success'
+        })
+        // 重新加载工单列表
+        this.loadOrders()
+      } else {
+        wx.showToast({
+          title: '导入失败',
+          icon: 'error'
+        })
+      }
+    } catch (error) {
+      console.error('导入失败:', error)
+      wx.showToast({
+        title: '导入失败',
+        icon: 'error'
+      })
+    } finally {
+      wx.hideLoading()
+    }
+  },
+
+  // 工单状态文本转换
+  getStatusText(status) {
+    const statusMap = {
+      pending: '待处理',
+      processing: '处理中',
+      completed: '已完成'
+    }
+    return statusMap[status] || status
+  },
+
+  // 日期格式化
+  formatDate(dateStr) {
+    const date = new Date(dateStr)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    return `${year}-${month}-${day} ${hours}:${minutes}`
+  },
+
+  // 加载工单统计
+  async loadStats() {
+    try {
+      const stats = await orderService.getOrderStats()
+      this.setData({ stats })
+    } catch (error) {
+      console.error('加载统计失败:', error)
+    }
+  },
+
+  // 加载工单列表
+  async loadOrders(page = 1) {
+    if (this.data.loading || (!this.data.hasMore && page > 1)) return
+
+    try {
+      this.setData({ loading: true })
+      const result = await orderService.getOrders(page, this.data.pageSize)
+      
+      // 处理返回的数据
+      const formattedOrders = result.data.map(order => ({
+        ...order,
+        statusText: this.getStatusText(order.status),
+        createTime: this.formatDate(order.createTime)
+      }))
+      
+      this.setData({ 
+        orders: page === 1 ? formattedOrders : [...this.data.orders, ...formattedOrders],
+        filteredOrders: page === 1 ? formattedOrders : [...this.data.filteredOrders, ...formattedOrders],
+        currentPage: page,
+        hasMore: formattedOrders.length === this.data.pageSize,
+        loading: false
+      })
+    } catch (error) {
+      console.error('加载工单失败:', error)
+      wx.showToast({
+        title: '加载失败',
+        icon: 'error'
+      })
+      this.setData({ loading: false })
+    }
+  },
+
+  // 下拉刷新
+  async onPullDownRefresh() {
+    await this.loadOrders(1)
+    await this.loadStats()
     wx.stopPullDownRefresh()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
+  // 上拉加载更多
   onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-    return {
-      title: '工单管理',
-      path: '/pages/admin/orders/index'
+    if (this.data.hasMore) {
+      this.loadOrders(this.data.currentPage + 1)
     }
   },
 
@@ -122,178 +186,28 @@ Page({
     this.setData({ filteredOrders: filtered })
   },
 
-  // 查看详情
-  viewDetail(e) {
-    const { id } = e.currentTarget.dataset
-    wx.navigateTo({
-      url: `/pages/admin/orders/detail/index?id=${id}`
-    })
-  },
-
-  // 分配工程师
-  assignEngineer(e) {
-    const { id } = e.currentTarget.dataset
-    const order = this.data.orders.find(o => o.id === id)
-    
-    wx.navigateTo({
-      url: `/pages/admin/orders/assign/index?id=${id}&customer=${order.customer}&equipment=${order.equipment}`
-    })
-  },
-
-  // 催单
-  urgeOrder(e) {
-    const { id } = e.currentTarget.dataset
-    const order = this.data.orders.find(o => o.id === id)
-    
-    wx.showModal({
-      title: '确认催单',
-      content: `是否确认催促工程师 ${order.engineer} 加快处理？`,
-      success: (res) => {
-        if (res.confirm) {
-          wx.showLoading({ title: '处理中' })
-          // TODO: 调用催单接口
-          setTimeout(() => {
-            wx.hideLoading()
-            wx.showToast({
-              title: '已催单',
-              icon: 'success'
-            })
-          }, 1000)
-        }
-      }
-    })
-  },
-
-  // 计算维修时长
-  calculateDuration(startTime) {
-    const start = new Date(startTime).getTime()
-    const now = new Date().getTime()
-    const hours = Math.floor((now - start) / (1000 * 60 * 60))
-    
-    if (hours < 24) {
-      return {
-        duration: hours,
-        durationText: `${hours}小时`
-      }
-    } else {
-      const days = Math.floor(hours / 24)
-      const remainHours = hours % 24
-      return {
-        duration: hours,
-        durationText: `${days}天${remainHours}小时`
-      }
-    }
-  },
-
-  // 加载工单列表
-  loadOrders() {
-    // 模拟数据
-    const orders = [
-      {
-        id: '001',
-        orderNo: 'WO20231127001',
-        status: 'pending',
-        statusText: '待处理',
-        customer: '余卫才',
-        equipment: '660F 0300',
-        issue: '打不着火',
-        createTime: '2023-11-27 10:30',
-        engineer: ''
-      },
-      {
-        id: '002',
-        orderNo: 'WO20231127002',
-        status: 'processing',
-        statusText: '处理中',
-        customer: '张三机械厂',
-        equipment: '1100F',
-        issue: '液压系统异常',
-        createTime: '2023-11-27 09:15',
-        engineer: '张星',
-        startTime: '2023-11-27 09:30'
-      },
-      {
-        id: '003',
-        orderNo: 'WO20231127003',
-        status: 'processing',
-        statusText: '处理中',
-        customer: '王五建设',
-        equipment: '330F',
-        issue: '制动系统异响',
-        createTime: '2023-11-26 14:00',
-        engineer: '古松',
-        startTime: '2023-11-26 14:30'
-      },
-      {
-        id: '004',
-        orderNo: 'WO20231127004',
-        status: 'completed',
-        statusText: '已完成',
-        customer: '李四工程',
-        equipment: '220F',
-        issue: '启动困难',
-        createTime: '2023-11-27 08:45',
-        engineer: '古松',
-        startTime: '2023-11-27 09:00',
-        endTime: '2023-11-27 11:30'
-      }
-    ]
-
-    // 计算进行中工单的维修时长
-    orders.forEach(order => {
-      if (order.status === 'processing' && order.startTime) {
-        const { duration, durationText } = this.calculateDuration(order.startTime)
-        order.duration = duration
-        order.durationText = durationText
-      }
-    })
-
-    // 计算统计数据
-    const stats = {
-      total: orders.length,
-      pending: orders.filter(o => o.status === 'pending').length,
-      processing: orders.filter(o => o.status === 'processing').length,
-      completed: orders.filter(o => o.status === 'completed').length
-    }
-
-    this.setData({ 
-      orders,
-      filteredOrders: orders,
-      stats
-    })
-
-    // 如果有进行中的工单，启动定时器更新时长
-    if (orders.some(o => o.status === 'processing')) {
-      this.startDurationTimer()
-    }
-  },
-
-  // 启动时长更新定时器
-  startDurationTimer() {
-    // 清除旧定时器
-    if (this.durationTimer) {
-      clearInterval(this.durationTimer)
-    }
-
-    // 每分钟更新一次时长
-    this.durationTimer = setInterval(() => {
-      const { orders } = this.data
-      let needUpdate = false
-
-      orders.forEach(order => {
-        if (order.status === 'processing' && order.startTime) {
-          const { duration, durationText } = this.calculateDuration(order.startTime)
-          if (order.duration !== duration) {
-            order.duration = duration
-            order.durationText = durationText
-            needUpdate = true
-          }
-        }
+  // 创建工单
+  async createOrder(data) {
+    try {
+      wx.showLoading({ title: '提交中...' })
+      const result = await orderService.createOrder(data)
+      
+      wx.showToast({
+        title: '创建成功',
+        icon: 'success'
       })
-
-      if (needUpdate) {
-        this.setData({ orders, filteredOrders: this.filterOrders(orders) })
-      }
-    }, 60000) // 每分钟更新一次
+      
+      // 刷新列表
+      this.loadOrders(1)
+      return result
+    } catch (error) {
+      console.error('创建工单失败:', error)
+      wx.showToast({
+        title: '创建失败',
+        icon: 'error'
+      })
+    } finally {
+      wx.hideLoading()
+    }
   }
 })

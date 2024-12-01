@@ -1,0 +1,33 @@
+<view class="container">
+  <form bindsubmit="onSubmit">
+    <view class="form-group">
+      <text class="label">姓名</text>
+      <input class="input" name="name" value="{{engineer.name}}" placeholder="请输入工程师姓名"/>
+    </view>
+    <view class="form-group">
+      <text class="label">等级</text>
+      <input class="input" name="level" value="{{engineer.level}}" placeholder="请输入工程师等级"/>
+    </view>
+    <view class="form-group">
+      <text class="label">电话</text>
+      <input class="input" name="phone" value="{{engineer.phone}}" placeholder="请输入联系电话"/>
+    </view>
+    <view class="form-group">
+      <text class="label">技能</text>
+      <textarea class="textarea" name="skills" value="{{engineer.skills}}" placeholder="请输入技能描述"/>
+    </view>
+    <view class="form-group status-group">
+      <text class="label">状态</text>
+      <view class="status {{engineer.status}}">
+        {{engineer.status === 'active' ? '在线' : '已停用'}}
+      </view>
+      <button 
+        class="status-btn {{engineer.status === 'active' ? 'danger' : 'primary'}}" 
+        bindtap="toggleStatus"
+      >
+        {{engineer.status === 'active' ? '停用' : '启用'}}
+      </button>
+    </view>
+    <button class="submit-btn" form-type="submit" type="primary">保存</button>
+  </form>
+</view> 

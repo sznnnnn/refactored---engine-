@@ -12,76 +12,50 @@
         bindconfirm="onSearch"
       />
     </view>
+    <view class="import-btn" bindtap="importWorkOrders">导入</view>
   </view>
 
-  <!-- 状态筛选 -->
-  <view class="filter-tabs">
-    <view class="tab-item {{status === 'all' ? 'active' : ''}}" 
+  <!-- 状态统计 -->
+  <view class="stats-bar">
+    <view class="stat-item {{status === 'all' ? 'active' : ''}}" 
           bindtap="switchStatus" data-status="all">
-      全部 <text class="count">({{stats.total}})</text>
+      全部({{stats.total}})
     </view>
-    <view class="tab-item {{status === 'pending' ? 'active' : ''}}" 
+    <view class="stat-item {{status === 'pending' ? 'active' : ''}}" 
           bindtap="switchStatus" data-status="pending">
-      待处理 <text class="count">({{stats.pending}})</text>
+      待处理({{stats.pending}})
     </view>
-    <view class="tab-item {{status === 'processing' ? 'active' : ''}}" 
+    <view class="stat-item {{status === 'processing' ? 'active' : ''}}" 
           bindtap="switchStatus" data-status="processing">
-      进行中 <text class="count">({{stats.processing}})</text>
+      处理中({{stats.processing}})
     </view>
-    <view class="tab-item {{status === 'completed' ? 'active' : ''}}" 
+    <view class="stat-item {{status === 'completed' ? 'active' : ''}}" 
           bindtap="switchStatus" data-status="completed">
-      已完成 <text class="count">({{stats.completed}})</text>
+      已完成({{stats.completed}})
     </view>
   </view>
 
   <!-- 工单列表 -->
-  <view class="order-list">
+  <view class="orders-list">
     <view class="order-item" wx:for="{{filteredOrders}}" wx:key="id">
       <view class="order-header">
-        <view class="order-left">
-          <text class="order-no">{{item.orderNo}}</text>
-          <text class="time">{{item.createTime}}</text>
-        </view>
-        <text class="status {{item.status}}">{{item.statusText}}</text>
+        <text class="order-number">工单号：{{item.orderNumber}}</text>
+        <text class="order-status {{item.status}}">{{item.statusText}}</text>
       </view>
-
-      <view class="order-info">
-        <view class="info-row">
-          <text class="label">客户：</text>
-          <text>{{item.customer}}</text>
+      <view class="order-content">
+        <view class="order-info">
+          <text>客户：{{item.customerName}}</text>
+          <text>创建时间：{{item.createTime}}</text>
         </view>
-        <view class="info-row">
-          <text class="label">设备：</text>
-          <text>{{item.equipment}}</text>
+        <view class="order-description">
+          <text>问题描述：{{item.description}}</text>
         </view>
-        <view class="info-row">
-          <text class="label">故障：</text>
-          <text>{{item.issue}}</text>
-        </view>
-        <view class="info-row">
-          <text class="label">工程师：</text>
-          <block wx:if="{{item.engineer}}">
-            <text class="engineer-name">{{item.engineer}}</text>
-            <text class="duration" wx:if="{{item.status === 'processing'}}">
-              (已处理{{item.durationText}})
-            </text>
-          </block>
-          <text class="pending-tag" wx:else>待分配</text>
-        </view>
-      </view>
-
-      <view class="order-footer">
-        <button class="action-btn" bindtap="viewDetail" data-id="{{item.id}}">详情</button>
-        <button class="action-btn" bindtap="assignEngineer" data-id="{{item.id}}" 
-                wx:if="{{item.status === 'pending'}}">分配</button>
-        <button class="action-btn" bindtap="urgeOrder" data-id="{{item.id}}" 
-                wx:if="{{item.status === 'processing'}}">催单</button>
       </view>
     </view>
   </view>
-
-  <!-- 无数据提示 -->
-  <view class="empty-tip" wx:if="{{!filteredOrders.length}}">
-    暂无相关工单
-  </view>
+  
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="no-more" wx:if="{{!hasMore && filteredOrders.length > 0}}">没有更多数据了</view>
+  <view class="empty" wx:if="{{!loading && filteredOrders.length === 0}}">暂无工单数据</view>
 </view>

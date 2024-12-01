@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="orders-list">
+    <view class="order-item" wx:for="{{orders}}" wx:key="id">
+      <view class="order-header">
+        <text class="order-number">{{item.orderNumber}}</text>
+        <text class="status {{item.status}}">{{item.status}}</text>
+      </view>
+      <view class="order-info">
+        <text>客户：{{item.customerName}}</text>
+        <text>时间：{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="empty" wx:if="{{orders.length === 0}}">暂无工单数据</view>
+</view> 
