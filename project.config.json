@@ -40,7 +40,8 @@
     },
     "requestDomain": [
       "https://apis.map.qq.com"
-    ]
+    ],
+    "ignoreUploadUnusedFiles": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
