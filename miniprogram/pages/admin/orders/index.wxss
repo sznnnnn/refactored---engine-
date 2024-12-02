@@ -1,0 +1,297 @@
+/* pages/admin/orders/index.wxss */
+.container {
+  padding: 24rpx;
+  background: #f5f7fa;
+  min-height: 100vh;
+}
+
+/* 顶部状态切换 */
+.tab-header {
+  display: flex;
+  background: #fff;
+  padding: 0 30rpx;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab-item.active {
+  color: #2b87ff;
+  font-weight: bold;
+}
+
+.orders-list {
+  width: 100%;
+}
+
+.order-item {
+  background: #fff;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0,0,0,0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.order-number {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.order-status {
+  font-size: 24rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+
+.order-status.pending {
+  background: #fef0f0;
+  color: #f56c6c;
+}
+
+.order-status.processing {
+  background: #e1f3d8;
+  color: #67c23a;
+}
+
+.order-status.completed {
+  background: #f0f9eb;
+  color: #67c23a;
+}
+
+.order-content {
+  font-size: 26rpx;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+
+.order-description {
+  color: #333;
+}
+
+.loading, .no-more, .empty {
+  text-align: center;
+  padding: 20rpx;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.search-bar {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background: #f5f7fa;
+  border-radius: 8rpx;
+  padding: 16rpx 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.search-input icon {
+  margin-right: 12rpx;
+  color: #999;
+}
+
+.search-input input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.filter-wrap {
+  display: flex;
+  gap: 24rpx;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 26rpx;
+  color: #666;
+  padding: 12rpx 24rpx;
+  background: #f5f7fa;
+  border-radius: 6rpx;
+}
+
+.arrow {
+  font-size: 20rpx;
+  color: #999;
+}
+
+/* 工单列表 */
+.order-list {
+  padding-bottom: 24rpx;
+}
+
+.order-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.order-item:active {
+  transform: scale(0.99);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f0f2f5;
+}
+
+.order-header .left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.order-no {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.create-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.status-tag {
+  font-size: 24rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 6rpx;
+}
+
+.status-tag.pending {
+  background: #fff7e6;
+  color: #fa8c16;
+}
+
+.status-tag.processing {
+  background: #e6f7ff;
+  color: #1989fa;
+}
+
+.status-tag.completed {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.status-tag.cancelled {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.order-content {
+  padding: 16rpx 0;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 12rpx;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.info-row:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  width: 120rpx;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.value {
+  flex: 1;
+  color: #333;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+  margin-top: 24rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid #f0f2f5;
+}
+
+.action-btn {
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-radius: 6rpx;
+  background: #fff;
+  color: #1989fa;
+  border: 1rpx solid #1989fa;
+  line-height: 1.4;
+  min-width: auto;
+}
+
+.action-btn:first-child {
+  background: #1989fa;
+  color: #fff;
+  border: none;
+}
+
+.action-btn:active {
+  opacity: 0.8;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 120rpx 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 96rpx;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+}
+
+/* 加载更多 */
+.loading-more {
+  text-align: center;
+  padding: 24rpx 0;
+  color: #999;
+  font-size: 24rpx;
+}
