@@ -1,0 +1,45 @@
+<!--pages/login/index.wxml-->
+<view class="preload {{isReady ? 'preload-hide' : ''}}">
+  <view class="loading-icon">🛠️</view>
+</view>
+
+<view class="container {{isReady ? 'show' : ''}}">
+  <view class="logo">
+    <view class="logo-icon">🛠️</view>
+    <view class="logo-text">工程设备维修</view>
+    <view class="subtitle">专业的设备维修管理平台</view>
+  </view>
+
+  <view class="form">
+    <view class="input-group {{isFocused ? 'input-group-focus' : ''}}">
+      <input 
+        class="input-box"
+        type="text" 
+        placeholder="请输入用户名" 
+        placeholder-class="input-placeholder"
+        model:value="{{username}}"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+      />
+    </view>
+    
+    <view class="input-group {{isFocused ? 'input-group-focus' : ''}}">
+      <input 
+        class="input-box"
+        type="password" 
+        placeholder="请输入密码" 
+        placeholder-class="input-placeholder"
+        model:value="{{password}}"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+      />
+    </view>
+
+    <button class="login-btn" hover-class="login-btn-hover" bindtap="handleLogin">登 录</button>
+  </view>
+
+  <view class="footer">
+    <view class="copyright">© 2024 工程设备维修管理系统</view>
+    <view class="version">Version 1.0.0</view>
+  </view>
+</view>

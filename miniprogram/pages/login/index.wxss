@@ -1,0 +1,155 @@
+/* pages/login/login.wxss */
+.container {
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.container.show {
+  opacity: 1;
+}
+
+.logo {
+  margin-bottom: 80rpx;
+  text-align: center;
+  animation: fade-in 0.8s ease-out;
+}
+
+.logo-icon {
+  font-size: 120rpx;
+  margin-bottom: 24rpx;
+  color: #1989fa;
+}
+
+.logo-text {
+  font-size: 48rpx;
+  font-weight: bold;
+  background: linear-gradient(135deg, #1989fa, #3ba0ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2rpx 4rpx rgba(25, 137, 250, 0.1);
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #666;
+  margin-top: 16rpx;
+}
+
+.form {
+  width: 100%;
+  max-width: 600rpx;
+  animation: slide-up 0.6s ease-out;
+}
+
+.input-group {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+  padding: 8rpx 32rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.input-group-focus {
+  box-shadow: 0 4rpx 20rpx rgba(25, 137, 250, 0.1);
+  transform: translateY(-2rpx);
+}
+
+.input-box {
+  height: 96rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.input-placeholder {
+  color: #999;
+}
+
+.login-btn {
+  margin-top: 48rpx;
+  background: linear-gradient(135deg, #1989fa, #3ba0ff);
+  color: #fff;
+  border: none;
+  height: 96rpx;
+  line-height: 96rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(25, 137, 250, 0.25);
+  transition: all 0.3s;
+}
+
+.login-btn-hover {
+  transform: translateY(2rpx);
+  box-shadow: 0 4rpx 12rpx rgba(25, 137, 250, 0.2);
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 48rpx 0;
+  animation: fade-in 1s ease-out;
+}
+
+.copyright {
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.5;
+}
+
+.version {
+  font-size: 22rpx;
+  color: #bbb;
+  margin-top: 8rpx;
+}
+
+.loading-icon {
+  font-size: 120rpx;
+  animation: bounce 1s infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20rpx); }
+}
+
+.preload {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s;
+}
+
+.preload-hide {
+  opacity: 0;
+  pointer-events: none;
+}
